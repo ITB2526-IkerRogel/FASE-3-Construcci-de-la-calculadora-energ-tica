@@ -1,131 +1,276 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SustainDash - Panel de Control</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Calculadora de Consums | ITB Sostenible</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --itb-blue: #004481;
+            --itb-dark: #002d56;
+            --eco-green: #10b981;
+            --accent-amber: #f59e0b;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #0f172a 100%);
+            z-index: -1;
+        }
+
+        .projection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased">
+    <div id="app-content">
+        <div class="bg-glow"></div>
 
-    <div class="bg-grid"></div>
-
-    <div class="app-wrapper">
-        <nav class="main-nav">
-            <div class="container nav-inner">
-                <a href="#" class="nav-brand">
-                    <div class="brand-icon" style="color: white;">S</div>
-                    <span>SUSTAIN<span style="color:var(--clean-green)">DASH</span></span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#" class="active">Dashboard</a></li>
-                    <li><span class="ods-badge">v2.0</span></li>
-                </ul>
-            </div>
-        </nav>
-
-        <main class="container">
-            <header class="hero">
-                <div class="hero-badge">
-                    <span class="dot"></span>
-                    Conectado a dataclean.json
-                </div>
-                <h1>Panel de <span class="gradient-text">Sostenibilidad</span></h1>
-                <p>Monitoreo de recursos y análisis de impacto ambiental en tiempo real.</p>
+        <main class="max-w-7xl mx-auto px-4 py-12">
+            <header class="mb-12 text-center sm:text-left">
+                <h1 id="header-titol" class="text-4xl font-black mb-2 gradient-text">Calculadora de Consums</h1>
+                <p id="header-periode" class="text-slate-400 font-medium">Carregant dades...</p>
             </header>
 
-            <section class="kpi-grid" id="kpi-container">
-                <div class="kpi-card water">
-                    <div class="kpi-icon">💧</div>
-                    <div class="kpi-label">Agua</div>
-                    <div class="kpi-value" id="kpi-water">--</div>
-                    <div class="kpi-unit">m³</div>
-                </div>
-                <div class="kpi-card electric">
-                    <div class="kpi-icon">⚡</div>
-                    <div class="kpi-label">Energía</div>
-                    <div class="kpi-value" id="kpi-energy">--</div>
-                    <div class="kpi-unit">kWh</div>
-                </div>
-            </section>
+            <div class="grid grid-cols-1 gap-12">
 
-            <section class="calc-section">
-                <div class="section-header">
-                    <h2 class="section-title">Registros Detallados</h2>
-                </div>
+                <section id="historic" class="glass-card rounded-3xl p-8 lg:p-10 border-l-4 border-l-slate-500">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="p-3 bg-slate-500/20 text-slate-300 rounded-xl">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-black text-slate-200">Dades Històriques (Curs 2024-2025)</h2>
+                                <p class="text-slate-400 text-sm">Consum base de l'últim curs registrat (Setembre - Agost)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projection-grid" id="historico-container">
+                        </div>
+                </section>
 
-                <div id="loading-state" class="stat-highlight" style="padding: 2rem;">
-                    <div class="stat-label">Cargando base de datos externa...</div>
-                </div>
+                <section id="projeccio" class="glass-card rounded-3xl p-8 lg:p-10 border-l-4 border-l-emerald-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl -z-10"></div>
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-black text-white">Projecció Curs 2025-2026</h2>
+                                <p class="text-slate-400 text-sm">Càlcul per al proper curs basat en la inflació i l'activitat</p>
+                            </div>
+                        </div>
 
-                <div class="data-table-wrapper" id="table-container" style="display: none;">
-                    <table class="data-table">
-                        <thead>
-                            <tr id="table-headers"></tr>
-                        </thead>
-                        <tbody id="data-table-body"></tbody>
-                    </table>
-                </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide bg-blue-500/10 text-blue-400 border border-blue-500/20" id="badge-ipc">IPC Aplicat: --%</span>
+                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20" id="badge-hist">Tendència Consum: --%</span>
+                        </div>
+                    </div>
+                    <div class="projection-grid" id="projeccio-container">
+                        </div>
+                </section>
 
-                <div id="error-state" class="error-container" style="display: none;">
-                    <div class="error-icon">❌</div>
-                    <h2>Error de Carga</h2>
-                    <p>No se encontró el archivo <code>dataclean.json</code> o el formato es incorrecto.</p>
-                </div>
-            </section>
+            </div>
         </main>
-
-        <footer class="main-footer">
-            <p>&copy; 2026 SustainDash • Datos vinculados dinámicamente</p>
-        </footer>
     </div>
 
     <script>
-        async function fetchData() {
-            const tableBody = document.getElementById('data-table-body');
-            const tableHeaders = document.getElementById('table-headers');
-            const tableContainer = document.getElementById('table-container');
-            const loadingState = document.getElementById('loading-state');
-            const errorState = document.getElementById('error-state');
+        let fullData = null;
 
+        // FÓRMULES DE CÀLCUL I ESTIMACIONS
+        const IPC_ESTIMAT = 0.032; // +3.2% d'inflació en preus
+        const VARIACIO_HISTORICA_CONSUM = 0.015; // +1.5% d'augment en el consum físic o de desgast
+
+        // Costos unitaris estimats per traduir € a mètriques físiques o a l'inrevés
+        const PREU_AIGUA_M3 = 2.10; // € per m3
+        const PREU_ELEC_KWH = 0.18; // € per kWh
+        const PREU_PAQUET_FOLIS = 5.00; // € aproximat per paquet de paper (Oficina)
+        const PREU_KG_NETEJA = 3.50; // € aproximat per Kg o Litre de producte neteja
+        const PREU_INTERVENCIO = 150.00; // € aproximat per intervenció de manteniment
+
+        async function fetchData() {
             try {
                 const response = await fetch('dataclean.json');
-                if (!response.ok) throw new Error("No se pudo cargar el JSON");
-                const data = await response.json();
-
-                if (data.length > 0) {
-                    const keys = Object.keys(data[0]);
-
-                    // Generar Headers
-                    keys.forEach(key => {
-                        const th = document.createElement('th');
-                        th.textContent = key.toUpperCase();
-                        tableHeaders.appendChild(th);
-                    });
-
-                    // Generar Filas
-                    data.forEach(item => {
-                        const tr = document.createElement('tr');
-                        keys.forEach(key => {
-                            const td = document.createElement('td');
-                            if (key === keys[0]) td.className = 'row-label';
-                            td.textContent = item[key];
-                            tr.appendChild(td);
-                        });
-                        tableBody.appendChild(tr);
-                    });
-
-                    loadingState.style.display = 'none';
-                    tableContainer.style.display = 'block';
-                }
+                if (!response.ok) throw new Error('Fitxer dataclean.json no detectat');
+                fullData = await response.json();
+                renderApp();
             } catch (error) {
-                loadingState.style.display = 'none';
-                errorState.style.display = 'flex';
                 console.error(error);
+                document.getElementById('app-content').innerHTML = `
+                    <div class="h-screen flex items-center justify-center p-10 text-center bg-[#0f172a]">
+                        <div class="max-w-md">
+                            <div class="text-6xl mb-6"></div>
+                            <h1 class="text-2xl font-bold mb-2 text-white">Error de dades</h1>
+                            <p class="text-slate-500">No s'ha pogut carregar el fitxer <code class="bg-slate-800 p-1 rounded text-blue-400">dataclean.json</code>.</p>
+                            <p class="text-xs text-slate-600 mt-4">Assegura't que el fitxer JSON està a la mateixa carpeta que aquest HTML.</p>
+                        </div>
+                    </div>`;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', fetchData);
+        function renderApp() {
+            if (!fullData) return;
+
+            // Mostrar els factors aplicats a la UI
+            document.getElementById('badge-ipc').innerText = `IPC: +${(IPC_ESTIMAT * 100).toFixed(1)}% (Preus)`;
+            document.getElementById('badge-hist').innerText = `Tendència: +${(VARIACIO_HISTORICA_CONSUM * 100).toFixed(1)}% (Ús)`;
+
+            document.getElementById('header-titol').innerText = `Calculadora - ${fullData.centre}`;
+            document.getElementById('header-periode').innerText = `Font de dades base: ${fullData.periode}`;
+
+            // 1. OBTENIR DADES BASE
+            const baseAiguaL_diari = fullData.indicadors_resum.indicadors[0].valor_base;
+            const baseEleckWh_diari = fullData.indicadors_resum.indicadors[1].valor_base_consum;
+            const baseOficinaEUR_mensual = (fullData.consumibles_oficina?.resum?.total_gastat_EUR || 0) / 12;
+            const baseNetejaEUR_mensual = (fullData.productes_neteja?.resum?.total_gastat_EUR || 0) / 12;
+            const baseMantEUR_mensual = (fullData.manteniment?.resum?.total_gastat_manteniment_EUR || 0) / 12;
+
+            const diesAny = 365;
+            const mesosAny = 12;
+
+            // Multiplicadors globals
+            const factorCost = 1 + IPC_ESTIMAT;
+            const factorConsum = 1 + VARIACIO_HISTORICA_CONSUM;
+
+            // Funcions de formateig
+            const formatEur = (v) => v.toLocaleString('ca-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+            const formatFisic = (v, isM3) => v.toLocaleString('ca-ES', { maximumFractionDigits: isM3 ? 1 : 0 });
+
+            // 2. CONSTRUIR ESTRUCTURA UNIFICADA
+            const histElecKWh = baseEleckWh_diari * diesAny;
+            const histAiguaM3 = (baseAiguaL_diari * diesAny) / 1000;
+            const histOficinaEur = baseOficinaEUR_mensual * mesosAny;
+            const histNetejaEur = baseNetejaEUR_mensual * mesosAny;
+            const histMantEur = baseMantEUR_mensual * mesosAny;
+
+            const dadesConsum = [
+                {
+                    titol: 'Elèctric', icon: '',
+                    valPrinHist: histElecKWh, unitPrin: 'kWh', isM3: false,
+                    valPrinProj: histElecKWh * factorConsum,
+                    valSecHist: histElecKWh * PREU_ELEC_KWH, unitSec: '€',
+                    valSecProj: (histElecKWh * factorConsum) * (PREU_ELEC_KWH * factorCost),
+                    labelF: 'ús i preu'
+                },
+                {
+                    titol: 'Aigua', icon: '',
+                    valPrinHist: histAiguaM3, unitPrin: 'm³', isM3: true,
+                    valPrinProj: histAiguaM3 * factorConsum,
+                    valSecHist: histAiguaM3 * PREU_AIGUA_M3, unitSec: '€',
+                    valSecProj: (histAiguaM3 * factorConsum) * (PREU_AIGUA_M3 * factorCost),
+                    labelF: 'ús i preu'
+                },
+                {
+                    titol: 'Oficina', icon: '',
+                    valPrinHist: histOficinaEur, unitPrin: '€', isM3: false,
+                    valPrinProj: (histOficinaEur / PREU_PAQUET_FOLIS * factorConsum) * (PREU_PAQUET_FOLIS * factorCost),
+                    valSecHist: histOficinaEur / PREU_PAQUET_FOLIS, unitSec: 'paquets',
+                    valSecProj: (histOficinaEur / PREU_PAQUET_FOLIS) * factorConsum,
+                    labelF: 'desgast i IPC'
+                },
+                {
+                    titol: 'Neteja', icon: '',
+                    valPrinHist: histNetejaEur, unitPrin: '€', isM3: false,
+                    valPrinProj: (histNetejaEur / PREU_KG_NETEJA * factorConsum) * (PREU_KG_NETEJA * factorCost),
+                    valSecHist: histNetejaEur / PREU_KG_NETEJA, unitSec: 'kg prod.',
+                    valSecProj: (histNetejaEur / PREU_KG_NETEJA) * factorConsum,
+                    labelF: 'desgast i IPC'
+                },
+                {
+                    titol: 'Manteniment', icon: '',
+                    valPrinHist: histMantEur, unitPrin: '€', isM3: false,
+                    valPrinProj: (histMantEur / PREU_INTERVENCIO * factorConsum) * (PREU_INTERVENCIO * factorCost),
+                    valSecHist: histMantEur / PREU_INTERVENCIO, unitSec: 'intervencions',
+                    valSecProj: (histMantEur / PREU_INTERVENCIO) * factorConsum,
+                    labelF: 'ús i IPC'
+                }
+            ];
+
+            const renderValPrin = (val, unit, isM3) => unit === '€' ? formatEur(val) : formatFisic(val, isM3);
+            const renderValSec = (val, unit) => unit === '€' ? formatEur(val) : formatFisic(val, false);
+            const renderUnitTextPrin = (unit) => unit === '€' ? '' : unit;
+            const renderUnitTextSec = (unit) => unit === '€' ? '' : unit;
+
+            // 3. RENDERITZAR SECCIÓ HISTÒRIC
+            const histContainer = document.getElementById('historico-container');
+            histContainer.innerHTML = dadesConsum.map(item => `
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 relative">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">${item.icon}</span>
+                        <h4 class="text-lg font-bold text-slate-300">${item.titol}</h4>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] uppercase text-slate-500 font-bold mb-1">Total Curs 24/25</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black mono text-white">${renderValPrin(item.valPrinHist, item.unitPrin, item.isM3)}</span>
+                            <span class="text-sm text-slate-400">${renderUnitTextPrin(item.unitPrin)}</span>
+                        </div>
+                        <div class="mt-2 flex items-center gap-1.5 text-xs text-slate-400 bg-black/20 p-2 rounded-lg inline-flex">
+                            <span class="text-slate-500">≈</span>
+                            <span class="font-mono text-slate-300 font-bold">${renderValSec(item.valSecHist, item.unitSec)}</span>
+                            <span>${renderUnitTextSec(item.unitSec)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // 4. RENDERITZAR SECCIÓ PROJECCIÓ
+            const projContainer = document.getElementById('projeccio-container');
+            projContainer.innerHTML = dadesConsum.map(item => `
+                <div class="bg-white/5 border border-emerald-500/20 rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 text-[9px] font-bold px-2 py-1 rounded-bl-lg uppercase">
+                        + ${item.labelF}
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">${item.icon}</span>
+                        <h4 class="text-lg font-bold text-white">${item.titol}</h4>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] uppercase text-emerald-500/70 font-bold mb-1">Estimat Curs 25/26</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black mono text-emerald-400">${renderValPrin(item.valPrinProj, item.unitPrin, item.isM3)}</span>
+                            <span class="text-sm text-emerald-500/60">${renderUnitTextPrin(item.unitPrin)}</span>
+                        </div>
+                        <div class="mt-2 flex items-center gap-1.5 text-xs text-emerald-600/80 bg-emerald-900/10 p-2 rounded-lg inline-flex">
+                            <span>≈</span>
+                            <span class="font-mono text-emerald-500 font-bold">${renderValSec(item.valSecProj, item.unitSec)}</span>
+                            <span>${renderUnitTextSec(item.unitSec)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.onload = fetchData;
     </script>
 </body>
 </html>
