@@ -1,6 +1,7 @@
 /**
  * App.js — Aplicació principal de la Calculadora ITB.
- * Carrega dinàmicament dataclean.json i genera tots els resultats.
+ * Carrega dinàmicament dataclean.json i genera els resultats sol·licitats (Fase 3.1).
+ * Cobreix els càlculs anuals i per períodes dels diferents indicadors.
  */
 
 (function () {
@@ -14,6 +15,7 @@
   document.addEventListener('DOMContentLoaded', async () => {
     setupNavigation();
 
+    // 1. Carregar les dades del JSON proporcionat
     rawData = await Calculator.carregarDades();
 
     if (!rawData) {
@@ -21,6 +23,7 @@
       return;
     }
 
+    // 2. Processar les dades aplicant tendències temporals i cicles estacionals
     indicadors = Calculator.processarTotsIndicadors(rawData);
 
     if (Object.keys(indicadors).length === 0) {
@@ -28,12 +31,14 @@
       return;
     }
 
-    // Primer indicador disponible per defecte
+    // Seleccionem el primer indicador per defecte
     currentIndicator = Object.keys(indicadors)[0];
 
     renderCentreName();
     renderKPIs();
     setupControls();
+
+    // 3. Generar els resultats inicials
     calculate();
   });
 
@@ -63,7 +68,7 @@
     }
   }
 
-  // ===== KPIs =====
+  // ===== KPIs: Resum ràpid de l'estat global =====
   function renderKPIs() {
     const grid = document.getElementById('kpi-grid');
     let html = '';
@@ -82,9 +87,7 @@
         ? Calculator.formatCurrency(ind.totalAnual)
         : Calculator.formatNumber(ind.totalAnual);
 
-      // Mostrar al KPI si porta l'IPC aplicat de forma visible
-      const ipcInfo = ind.ipcAplicat ? ` (+${((ind.ipcAplicat - 1) * 100).toFixed(1)}% IPC)` : '';
-      const unitDisplay = ind.unitat === '€' ? `/any${ipcInfo}` : ` ${ind.unitatCurta}/any`;
+      const unitDisplay = ind.unitat === '€' ? `/any` : ` ${ind.unitatCurta}/any`;
 
       html += `
         <div class="kpi-card ${ind.cssClass}">
@@ -97,7 +100,7 @@
     grid.innerHTML = html;
   }
 
-  // ===== CONTROLS =====
+  // ===== CONTROLS: Permeten els 8 càlculs diferents requerits =====
   function setupControls() {
     const indicatorSelect = document.getElementById('calc-indicator');
     const modeSelect = document.getElementById('calc-mode');
@@ -106,20 +109,22 @@
     const calcBtn = document.getElementById('calc-btn');
     const periodeControls = document.getElementById('periode-controls');
 
-    // Populate indicator dropdown from actual data
+    // Omplir el selector d'indicadors
     indicatorSelect.innerHTML = '';
     for (const [clau, ind] of Object.entries(indicadors)) {
       const opt = new Option(`${ind.icona} ${ind.nom}`, clau);
       indicatorSelect.add(opt);
     }
 
-    // Populate months
+    // Omplir els selectors de mesos
     Calculator.MESOS_FULL.forEach((mes, i) => {
       mesIniciSelect.add(new Option(mes, i));
       mesFiSelect.add(new Option(mes, i));
     });
+
+    // Per defecte: Curs escolar (Setembre a Juny)
     mesIniciSelect.value = 8; // Setembre
-    mesFiSelect.value = 5;   // Juny
+    mesFiSelect.value = 5;    // Juny
 
     modeSelect.addEventListener('change', () => {
       currentMode = modeSelect.value;
@@ -137,7 +142,7 @@
     calcBtn.addEventListener('click', calculate);
   }
 
-  // ===== CALCULATE =====
+  // ===== CALCULATE: Genera els resultats segons la selecció =====
   function calculate() {
     const ind = indicadors[currentIndicator];
     if (!ind) return;
@@ -151,6 +156,7 @@
     }
   }
 
+  // Càlculs anuals (Pròxim any complet)
   function renderAnualResults(ind) {
     renderResultCards(ind, ind.mensual, ind.totalAnual, ind.totalCost, 'Any Complet', ind.mensual.length);
     renderMainChart(ind, ind.mensual);
@@ -158,6 +164,7 @@
     renderCostDistribution();
   }
 
+  // Càlculs per període (Ex: Setembre a Juny)
   function renderPeriodeResults(ind, mesInici, mesFi) {
     const result = Calculator.calcularPeriode(ind, mesInici, mesFi);
     if (!result) return;
@@ -169,7 +176,7 @@
     renderCostDistribution();
   }
 
-  // ===== RENDER RESULTS =====
+  // ===== RENDERITZACIÓ DE RESULTATS (Targetes, Gràfics i Taules) =====
   function renderResultCards(ind, data, totalConsum, totalCost, title, mesos) {
     const grid = document.getElementById('results-grid');
     const mitjana = mesos > 0 ? totalConsum / mesos : 0;
@@ -179,6 +186,7 @@
       ? Calculator.formatCurrency(totalConsum)
       : `${Calculator.formatNumber(totalConsum, 1)} <span class="kpi-unit">${ind.unitatCurta}</span>`;
 
+    // Targetes dinàmiques segons el tipus d'indicador
     let card3 = '';
     if (ind.id === 'consum_electric_solar') {
       card3 = `
@@ -236,9 +244,6 @@
         </div>`;
     }
 
-    // Aquí es on es fa visible l'IPC als costos estimats
-    const ipcLabel = ind.ipcAplicat ? ` <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(+${((ind.ipcAplicat - 1) * 100).toFixed(1)}% IPC)</span>` : '';
-
     grid.innerHTML = `
       <div class="result-card">
         <div class="result-header">
@@ -252,7 +257,7 @@
         <div class="result-header">
           <span class="indicator-tag ${ind.cssClass}">💰 Cost</span>
         </div>
-        <div class="result-title">Cost total projectat${ipcLabel}</div>
+        <div class="result-title">Cost total projectat</div>
         <div class="result-value">${Calculator.formatCurrency(totalCost)}</div>
         <div class="result-detail">${mesos} mesos · ${Calculator.formatCurrency(totalCost / Math.max(mesos, 1))}/mes</div>
       </div>
@@ -260,7 +265,6 @@
       ${card4}`;
   }
 
-  // ===== CHART =====
   function renderMainChart(ind, data) {
     if (ind.id === 'consum_electric_solar') {
       Charts.createElectricChart('main-chart', data);
@@ -273,7 +277,6 @@
     Charts.createCostDistributionChart('cost-chart', indicadors);
   }
 
-  // ===== TABLE =====
   function renderTable(ind, data) {
     const tbody = document.getElementById('table-body');
     const isElectric = ind.id === 'consum_electric_solar';
@@ -313,14 +316,11 @@
 
     tbody.innerHTML = html;
 
-    // Update table headers for electric (afegim l'avís de l'IPC a la capçalera Cost)
     const thead = document.getElementById('table-head');
-    const ipcLabelTHead = ind.ipcAplicat ? ` (+IPC)` : '';
-
     if (isElectric) {
-      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost${ipcLabelTHead}</th><th>Solar</th><th>Cobertura</th><th>Nivell</th></tr>`;
+      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost</th><th>Solar</th><th>Cobertura</th><th>Nivell</th></tr>`;
     } else {
-      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost${ipcLabelTHead}</th><th>Nivell</th></tr>`;
+      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost</th><th>Nivell</th></tr>`;
     }
   }
 
