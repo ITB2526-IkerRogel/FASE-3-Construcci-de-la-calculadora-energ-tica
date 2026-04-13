@@ -1,4 +1,72 @@
-div>
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estratègies de reducció del consum energètic i de recursos de l'ITB. Consells pràctics i accions concretes amb economia circular.">
+  <title>Estratègies de Reducció — Calculadora ITB</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="app-wrapper">
+
+    <nav class="main-nav">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon">🌿</span>
+          Calculadora ITB
+        </a>
+        <button class="nav-hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/index.html">📊 Calculadora</a></li>
+          <li><a href="reduccio.html" class="active">📉 Reducció</a></li>
+          <li><a href="/pla-accio.html">📋 Pla d'Acció</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Fase 3 — Estratègies de Reducció
+        </div>
+        <h1>Com <span class="gradient-text">reduir el consum</span><br>de cada indicador</h1>
+        <p>Accions concretes basades en les dades reals del centre, amb inversió estimada, potencial de reducció i principis d'economia circular.</p>
+        <div class="centre-name" id="centre-name"></div>
+      </div>
+    </section>
+
+    <main class="container">
+
+      <section class="calc-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">🎯 Accions de Reducció per Indicador</h2>
+            <p class="section-subtitle">Cada acció inclou l'estimació de reducció, inversió necessària i classificació d'economia circular.</p>
+          </div>
+        </div>
+        <div class="reduction-grid" id="reduction-grid"></div>
+      </section>
+
+      <section class="calc-section" style="margin-top:var(--space-2xl);">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">💡 Consells Pràctics</h2>
+            <p class="section-subtitle">Bones pràctiques quotidianes basades en les anomalies detectades a les dades del centre.</p>
+          </div>
+        </div>
+        <div id="tips-container"></div>
+      </section>
+
+      <section class="calc-section">
+        <div class="section-header">
+          <h2 class="section-title">🌍 ODS Relacionats</h2>
+        </div>
         <div id="ods-container"></div>
       </section>
 
