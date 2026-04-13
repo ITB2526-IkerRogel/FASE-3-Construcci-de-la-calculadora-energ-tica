@@ -124,7 +124,7 @@
 
         async function fetchData() {
             try {
-                const response = await fetch('dataclean.json');
+                const response = await fetch('./dataclean.json');
                 if (!response.ok) throw new Error('Fitxer dataclean.json no detectat');
                 fullData = await response.json();
                 renderApp();
