@@ -1,6 +1,6 @@
 /**
  * Calculator Engine — Processa dinàmicament el JSON dataclean.json
- * S'adapta a l'estructura de dades real de l'ITB.
+ * S'adapta a l'estructura de dades real de l'ITB amb projecció d'IPC.
  */
 
 const MESOS_LABELS = ['Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'];
@@ -9,7 +9,6 @@ const DIES_MES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 // Constant per a la projecció del pròxim any (Dades històriques + Inflació)
 const IPC_ESTIMAT = 1.031; // Increment del 3.1% d'IPC previst
-console.log(`[Calculadora ITB] Motor actiu. Projectant l'any vinent amb un IPC de +${((IPC_ESTIMAT - 1) * 100).toFixed(1)}% sobre l'històric.`);
 
 // Factors estacionals per al curs escolar (set-jun lectiu, jul-ago no lectiu)
 const FACTORS_ESCOLA = {
@@ -468,5 +467,6 @@ window.Calculator = {
   MESOS_LABELS,
   MESOS_FULL,
   DIES_MES,
-  FACTORS_ESCOLA
+  FACTORS_ESCOLA,
+  IPC_ESTIMAT
 };
