@@ -81,7 +81,10 @@
       const displayValue = ind.unitat === '€'
         ? Calculator.formatCurrency(ind.totalAnual)
         : Calculator.formatNumber(ind.totalAnual);
-      const unitDisplay = ind.unitat === '€' ? '/any' : ` ${ind.unitatCurta}/any`;
+
+      // Mostrar al KPI si porta l'IPC aplicat de forma visible
+      const ipcInfo = ind.ipcAplicat ? ` (+${((ind.ipcAplicat - 1) * 100).toFixed(1)}% IPC)` : '';
+      const unitDisplay = ind.unitat === '€' ? `/any${ipcInfo}` : ` ${ind.unitatCurta}/any`;
 
       html += `
         <div class="kpi-card ${ind.cssClass}">
@@ -233,6 +236,9 @@
         </div>`;
     }
 
+    // Aquí es on es fa visible l'IPC als costos estimats
+    const ipcLabel = ind.ipcAplicat ? ` <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(+${((ind.ipcAplicat - 1) * 100).toFixed(1)}% IPC)</span>` : '';
+
     grid.innerHTML = `
       <div class="result-card">
         <div class="result-header">
@@ -246,7 +252,7 @@
         <div class="result-header">
           <span class="indicator-tag ${ind.cssClass}">💰 Cost</span>
         </div>
-        <div class="result-title">Cost total estimat</div>
+        <div class="result-title">Cost total projectat${ipcLabel}</div>
         <div class="result-value">${Calculator.formatCurrency(totalCost)}</div>
         <div class="result-detail">${mesos} mesos · ${Calculator.formatCurrency(totalCost / Math.max(mesos, 1))}/mes</div>
       </div>
@@ -307,12 +313,14 @@
 
     tbody.innerHTML = html;
 
-    // Update table headers for electric
+    // Update table headers for electric (afegim l'avís de l'IPC a la capçalera Cost)
     const thead = document.getElementById('table-head');
+    const ipcLabelTHead = ind.ipcAplicat ? ` (+IPC)` : '';
+
     if (isElectric) {
-      thead.innerHTML = '<tr><th>Mes</th><th>Consum</th><th>Cost</th><th>Solar</th><th>Cobertura</th><th>Nivell</th></tr>';
+      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost${ipcLabelTHead}</th><th>Solar</th><th>Cobertura</th><th>Nivell</th></tr>`;
     } else {
-      thead.innerHTML = '<tr><th>Mes</th><th>Consum</th><th>Cost</th><th>Nivell</th></tr>';
+      thead.innerHTML = `<tr><th>Mes</th><th>Consum</th><th>Cost${ipcLabelTHead}</th><th>Nivell</th></tr>`;
     }
   }
 
