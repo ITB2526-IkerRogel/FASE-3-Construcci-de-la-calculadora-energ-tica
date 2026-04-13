@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Estratègies de reducció del consum energètic i de recursos de l'ITB. Consells pràctics i accions concretes amb economia circular.">
-  <title>Estratègies de Reducció — Calculadora ITB</title>
+  <meta name="description" content="Calculadora energètica de l'Institut Tecnològic de Barcelona (ITB). Analitza el consum d'aigua, electricitat, consumibles i productes de neteja amb dades reals.">
+  <title>Calculadora ITB — Calculadora Energètica</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
@@ -22,9 +22,9 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
-          <li><a href="/index.html">📊 Calculadora</a></li>
-          <li><a href="reduccio.html" class="active">📉 Reducció</a></li>
-          <li><a href="/pla-accio.html">📋 Pla d'Acció</a></li>
+          <li><a href="index.html" class="active">📊 Calculadora</a></li>
+          <li><a href="reduccio.html">📉 Reducció</a></li>
+          <li><a href="pla-accio.html">📋 Pla d'Acció</a></li>
         </ul>
       </div>
     </nav>
@@ -33,64 +33,107 @@
       <div class="container">
         <div class="hero-badge">
           <span class="dot"></span>
-          Fase 3 — Estratègies de Reducció
+          Fase 3 — Calculadora Energètica
         </div>
-        <h1>Com <span class="gradient-text">reduir el consum</span><br>de cada indicador</h1>
-        <p>Accions concretes basades en les dades reals del centre, amb inversió estimada, potencial de reducció i principis d'economia circular.</p>
+        <h1>Analitza el <span class="gradient-text">consum de recursos</span><br>del teu centre educatiu</h1>
+        <p>Projeccions amb tendències temporals, cicles estacionals i variabilitat mensual basades en dades reals de factures i comptadors intel·ligents.</p>
         <div class="centre-name" id="centre-name"></div>
       </div>
     </section>
 
-    <main class="container">
+    <main class="container" id="app-content">
+
+      <div class="kpi-grid" id="kpi-grid"></div>
 
       <section class="calc-section">
         <div class="section-header">
           <div>
-            <h2 class="section-title">🎯 Accions de Reducció per Indicador</h2>
-            <p class="section-subtitle">Cada acció inclou l'estimació de reducció, inversió necessària i classificació d'economia circular.</p>
+            <h2 class="section-title">Calculadora de Consum</h2>
+            <p class="section-subtitle">Selecciona un indicador i un mode de càlcul per veure les projeccions.</p>
           </div>
         </div>
-        <div class="reduction-grid" id="reduction-grid"></div>
-      </section>
 
-      <section class="calc-section" style="margin-top:var(--space-2xl);">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">💡 Consells Pràctics</h2>
-            <p class="section-subtitle">Bones pràctiques quotidianes basades en les anomalies detectades a les dades del centre.</p>
+        <div class="calc-controls">
+          <div class="controls-grid">
+            <div class="form-group">
+              <label for="calc-indicator">Indicador</label>
+              <select id="calc-indicator"></select>
+            </div>
+
+            <!-- NOU SELECTOR D'IPC INTEGRAT AL TEU DISSENY ORIGINAL -->
+            <div class="form-group">
+              <label for="calc-any">Any / Projecció</label>
+              <select id="calc-any">
+                <option value="historic">📊 Històric (Any passat)</option>
+                <option value="projectat">📈 Projectat (+3.1% IPC, +1.5% Ús)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calc-mode">Mode de càlcul</label>
+              <select id="calc-mode">
+                <option value="anual">📅 Pròxim any complet</option>
+                <option value="periode">📆 Període personalitzat</option>
+              </select>
+            </div>
+            <div id="periode-controls" style="display:none;contents;">
+              <div class="form-group">
+                <label for="calc-mes-inici">Mes d'inici</label>
+                <select id="calc-mes-inici"></select>
+              </div>
+              <div class="form-group">
+                <label for="calc-mes-fi">Mes de fi</label>
+                <select id="calc-mes-fi"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <button class="btn btn-primary" id="calc-btn">🔄 Calcular</button>
+            </div>
           </div>
         </div>
-        <div id="tips-container"></div>
+
+        <div class="results-grid" id="results-grid"></div>
       </section>
 
       <section class="calc-section">
         <div class="section-header">
-          <h2 class="section-title">🌍 ODS Relacionats</h2>
+          <h2 class="section-title">📈 Evolució Mensual</h2>
         </div>
-        <div id="ods-container"></div>
+        <div class="chart-container">
+          <div class="chart-wrapper">
+            <canvas id="main-chart"></canvas>
+          </div>
+        </div>
       </section>
 
-      <section class="calc-section" style="margin-top:var(--space-xl);">
+      <section class="calc-section">
         <div class="section-header">
-          <h2 class="section-title">📊 Resum d'Impacte Potencial</h2>
+          <h2 class="section-title">🍩 Distribució de Costos Anual</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-lg);">
-          <div class="stat-highlight fade-in">
-            <div class="big-number green">-30%</div>
-            <div class="stat-label">Objectiu de reducció global</div>
+        <div class="chart-container">
+          <div class="chart-wrapper" style="height:300px;">
+            <canvas id="cost-chart"></canvas>
           </div>
-          <div class="stat-highlight fade-in fade-in-delay-1">
-            <div class="big-number blue">3 anys</div>
-            <div class="stat-label">Horitzó temporal</div>
-          </div>
-          <div class="stat-highlight fade-in fade-in-delay-2">
-            <div class="big-number purple">16</div>
-            <div class="stat-label">Accions planificades</div>
-          </div>
-          <div class="stat-highlight fade-in fade-in-delay-3">
-            <div class="big-number amber">62%</div>
-            <div class="stat-label">Accions d'economia circular</div>
-          </div>
+        </div>
+      </section>
+
+      <section class="calc-section">
+        <div class="section-header">
+          <h2 class="section-title">📋 Detall Mensual</h2>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead id="table-head">
+              <tr>
+                <th>Mes</th>
+                <th>Consum</th>
+                <th>Cost</th>
+                <th>Nivell</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
         </div>
       </section>
 
@@ -98,7 +141,7 @@
 
     <footer class="main-footer">
       <div class="container">
-        <p>🌿 Calculadora ITB — Estratègies de Reducció · Fase 3 · Dades: <code>dataclean.json</code></p>
+        <p>🌿 Calculadora ITB — Calculadora Energètica · Fase 3 · Dades: <code>dataclean.json</code></p>
       </div>
     </footer>
 
@@ -106,6 +149,6 @@
 
   <script src="js/calculator.js"></script>
   <script src="js/charts.js"></script>
-  <script src="js/reduction.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
