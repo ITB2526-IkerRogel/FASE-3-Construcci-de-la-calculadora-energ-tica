@@ -7,8 +7,9 @@ const MESOS_LABELS = ['Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'S
 const MESOS_FULL = ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'];
 const DIES_MES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-// Constant per a la projecció del pròxim any
+// Constant per a la projecció del pròxim any (Dades històriques + Inflació)
 const IPC_ESTIMAT = 1.031; // Increment del 3.1% d'IPC previst
+console.log(`[Calculadora ITB] Motor actiu. Projectant l'any vinent amb un IPC de +${((IPC_ESTIMAT - 1) * 100).toFixed(1)}% sobre l'històric.`);
 
 // Factors estacionals per al curs escolar (set-jun lectiu, jul-ago no lectiu)
 const FACTORS_ESCOLA = {
@@ -60,7 +61,7 @@ function processarAigua(data) {
       mesAbr: MESOS_LABELS[i],
       index: i,
       consum: Math.round(consum),
-      cost: Math.round(consum * 0.00285 * IPC_ESTIMAT * 100) / 100, // ~2.85€/m³ → 0.00285€/L ajustat a l'IPC
+      cost: Math.round(consum * 0.00285 * IPC_ESTIMAT * 100) / 100, // + IPC aplicat a la tarifa
       unitat: 'L'
     };
   });
@@ -85,6 +86,7 @@ function processarAigua(data) {
     totalAnual,
     totalCost: Math.round(totalCost * 100) / 100,
     anomalia: data.consum_aigua.resum?.anomalia_detectada,
+    ipcAplicat: IPC_ESTIMAT,
     dadesOriginals: dades
   };
 }
@@ -127,8 +129,8 @@ function processarElectric(data) {
       produccioSolar: Math.round(produccioSolar * 10) / 10,
       importatXarxa: Math.round(Math.max(consumTotal - produccioSolar, 0) * 10) / 10,
       autoconsum: Math.round(Math.min(produccioSolar, consumTotal) * 10) / 10,
-      cost: Math.round(consumTotal * 0.18 * IPC_ESTIMAT * 100) / 100, // ~0.18€/kWh ajustat a l'IPC
-      costNet: Math.round(Math.max(consumTotal - produccioSolar, 0) * 0.18 * IPC_ESTIMAT * 100) / 100,
+      cost: Math.round(consumTotal * 0.18 * IPC_ESTIMAT * 100) / 100, // + IPC aplicat a tarifa
+      costNet: Math.round(Math.max(consumTotal - produccioSolar, 0) * 0.18 * IPC_ESTIMAT * 100) / 100, // + IPC aplicat a la part importada
       coberturaSolar: consumTotal > 0 ? Math.round((Math.min(produccioSolar, consumTotal) / consumTotal) * 1000) / 10 : 0,
       co2Evitat: Math.round(produccioSolar * 0.000478 * 1000) / 1000, // t CO2
       unitat: 'kWh'
@@ -163,6 +165,7 @@ function processarElectric(data) {
     totalCostNet: Math.round(totalCostNet * 100) / 100,
     totalCO2: Math.round(totalCO2 * 100) / 100,
     coberturaMitjana: totalAnual > 0 ? Math.round((totalSolar / totalAnual) * 1000) / 10 : 0,
+    ipcAplicat: IPC_ESTIMAT,
     dadesOriginals: dades,
     resumGener: resum
   };
@@ -177,23 +180,14 @@ function processarConsumibles(data) {
   const factures = data.consumibles_oficina.dades;
   const resum = data.consumibles_oficina.resum;
 
-  // Mapa de factures per mes
-  const perMes = {};
-  factures.forEach(f => {
-    const dataF = new Date(f.data);
-    const mesKey = dataF.getMonth();
-    if (!perMes[mesKey]) perMes[mesKey] = 0;
-    perMes[mesKey] += f.total_factura_EUR || 0;
-  });
-
   // Total facturat i mesos amb dades
   const totalFacturat = resum?.total_gastat_EUR || factures.reduce((s, f) => s + (f.total_factura_EUR || 0), 0);
 
-  // Distribució mensual amb factors escola (més activitat set-oct, abr-jun)
+  // Distribució mensual amb factors escola
   const pesosEscola = [0.08, 0.08, 0.09, 0.10, 0.09, 0.10, 0.02, 0.01, 0.14, 0.12, 0.09, 0.08];
 
-  // Projecció ajustada amb IPC
-  const anualEstimat = (resum?.total_gastat_EUR ? resum.total_gastat_EUR * 2 : totalFacturat * 2) * IPC_ESTIMAT; // 6 mesos → 12 + IPC
+  // Projecció ajustada: Dades històriques base * 2 (per fer l'any complet) * IPC
+  const anualEstimat = (resum?.total_gastat_EUR ? resum.total_gastat_EUR * 2 : totalFacturat * 2) * IPC_ESTIMAT; // + IPC
 
   const mensual = pesosEscola.map((pes, i) => {
     const consum = anualEstimat * pes;
@@ -223,6 +217,7 @@ function processarConsumibles(data) {
     mensual,
     totalAnual: Math.round(anualEstimat * 100) / 100,
     totalCost: Math.round(anualEstimat * 100) / 100,
+    ipcAplicat: IPC_ESTIMAT,
     factures,
     observacio: resum?.observacio
   };
@@ -237,8 +232,8 @@ function processarNeteja(data) {
   const factures = data.productes_neteja.dades;
   const resum = data.productes_neteja.resum;
 
-  // Projecció ajustada amb IPC
-  const anualEstimat = (resum?.total_gastat_EUR ? resum.total_gastat_EUR * 2 : 2400) * IPC_ESTIMAT;
+  // Projecció ajustada amb històric + IPC
+  const anualEstimat = (resum?.total_gastat_EUR ? resum.total_gastat_EUR * 2 : 2400) * IPC_ESTIMAT; // + IPC
 
   const pesosEscola = [0.08, 0.08, 0.09, 0.09, 0.09, 0.10, 0.04, 0.03, 0.12, 0.10, 0.09, 0.09];
 
@@ -268,6 +263,7 @@ function processarNeteja(data) {
     mensual,
     totalAnual: Math.round(anualEstimat * 100) / 100,
     totalCost: Math.round(anualEstimat * 100) / 100,
+    ipcAplicat: IPC_ESTIMAT,
     factures,
     detallResum: resum,
     observacio: resum?.observacio
@@ -284,9 +280,9 @@ function processarTelecom(data) {
   const costMensualBase = resum?.cost_mensual_telecomunicacions_EUR || 80;
   const anualEstimatBase = resum?.cost_anual_estimat_EUR || costMensualBase * 12;
 
-  // Ajust amb IPC
-  const costMensual = costMensualBase * IPC_ESTIMAT;
-  const anualEstimat = anualEstimatBase * IPC_ESTIMAT;
+  // Ajust de l'històric amb IPC
+  const costMensual = costMensualBase * IPC_ESTIMAT; // + IPC
+  const anualEstimat = anualEstimatBase * IPC_ESTIMAT; // + IPC
 
   const mensual = DIES_MES.map((_, i) => ({
     mes: MESOS_FULL[i],
@@ -311,6 +307,7 @@ function processarTelecom(data) {
     mensual,
     totalAnual: Math.round(anualEstimat * 100) / 100,
     totalCost: Math.round(anualEstimat * 100) / 100,
+    ipcAplicat: IPC_ESTIMAT,
     proveidors: resum?.proveidors,
     observacio: resum?.observacio
   };
@@ -323,8 +320,8 @@ function processarManteniment(data) {
   if (!data?.manteniment) return null;
 
   const resum = data.manteniment.resum;
-  // Ajust amb IPC
-  const totalAnual = (resum?.total_gastat_manteniment_EUR || 3909.48) * IPC_ESTIMAT;
+  // Ajust de l'històric amb IPC
+  const totalAnual = (resum?.total_gastat_manteniment_EUR || 3909.48) * IPC_ESTIMAT; // + IPC
   const categories = resum?.categories || {};
 
   // Distribució mensual (reparacions concentrades en mesos específics)
@@ -356,6 +353,7 @@ function processarManteniment(data) {
     mensual,
     totalAnual: Math.round(totalAnual * 100) / 100,
     totalCost: Math.round(totalAnual * 100) / 100,
+    ipcAplicat: IPC_ESTIMAT,
     categories,
     factures: data.manteniment.dades,
     observacio: resum?.observacio
