@@ -1,154 +1,118 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculadora energètica de l'Institut Tecnològic de Barcelona (ITB). Analitza el consum d'aigua, electricitat, consumibles i productes de neteja amb dades reals.">
-  <title>Calculadora ITB — Calculadora Energètica</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Datos - Vista Principal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @-webkit-keyframes spinner { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
-<body>
-  <div class="bg-grid"></div>
-  <div class="app-wrapper">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-    <nav class="main-nav">
-      <div class="container nav-inner">
-        <a href="index.html" class="nav-brand">
-          <span class="brand-icon">🌿</span>
-          Calculadora ITB
-        </a>
-        <button class="nav-hamburger" aria-label="Menú">
-          <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">📊 Calculadora</a></li>
-          <li><a href="reduccio.html">📉 Reducció</a></li>
-          <li><a href="pla-accio.html">📋 Pla d'Acció</a></li>
-        </ul>
-      </div>
+    <nav class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">DataVisualizer v2.0</h1>
+            <div class="text-sm text-gray-500">Origen: <span class="font-mono text-indigo-500">dataclean.json</span></div>
+        </div>
     </nav>
 
-    <section class="hero">
-      <div class="container">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          Fase 3 — Calculadora Energètica
-        </div>
-        <h1>Analitza el <span class="gradient-text">consum de recursos</span><br>del teu centre educatiu</h1>
-        <p>Projeccions amb tendències temporals, cicles estacionals i variabilitat mensual basades en dades reals de factures i comptadors intel·ligents.</p>
-        <div class="centre-name" id="centre-name"></div>
-      </div>
-    </section>
+    <main class="max-w-7xl mx-auto px-6 py-8">
 
-    <main class="container" id="app-content">
-
-      <div class="kpi-grid" id="kpi-grid"></div>
-
-      <section class="calc-section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Calculadora de Consum</h2>
-            <p class="section-subtitle">Selecciona un indicador i un mode de càlcul per veure les projeccions.</p>
-          </div>
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-gray-900">Resumen de Información</h2>
+            <p class="mt-2 text-gray-600">Visualización de datos procesados y listos para análisis.</p>
         </div>
 
-        <div class="calc-controls">
-          <div class="controls-grid">
-            <div class="form-group">
-              <label for="calc-indicator">Indicador</label>
-              <select id="calc-indicator"></select>
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+            <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+            <p class="text-gray-500">Cargando datos externos...</p>
+        </div>
+
+        <div id="content-area" class="hidden">
+            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr id="table-headers">
+                            </tr>
+                    </thead>
+                    <tbody id="data-table-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
             </div>
-
-            <!-- NOU SELECTOR D'IPC INTEGRAT AL TEU DISSENY ORIGINAL -->
-            <div class="form-group">
-              <label for="calc-any">Any / Projecció</label>
-              <select id="calc-any">
-                <option value="historic">📊 Històric (Any passat)</option>
-                <option value="projectat">📈 Projectat (+3.1% IPC, +1.5% Ús)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="calc-mode">Mode de càlcul</label>
-              <select id="calc-mode">
-                <option value="anual">📅 Pròxim any complet</option>
-                <option value="periode">📆 Període personalitzat</option>
-              </select>
-            </div>
-            <div id="periode-controls" style="display:none;contents;">
-              <div class="form-group">
-                <label for="calc-mes-inici">Mes d'inici</label>
-                <select id="calc-mes-inici"></select>
-              </div>
-              <div class="form-group">
-                <label for="calc-mes-fi">Mes de fi</label>
-                <select id="calc-mes-fi"></select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>&nbsp;</label>
-              <button class="btn btn-primary" id="calc-btn">🔄 Calcular</button>
-            </div>
-          </div>
         </div>
 
-        <div class="results-grid" id="results-grid"></div>
-      </section>
-
-      <section class="calc-section">
-        <div class="section-header">
-          <h2 class="section-title">📈 Evolució Mensual</h2>
+        <div id="error-state" class="hidden p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p class="text-red-700 text-center">No se pudo cargar el archivo <span class="font-bold">dataclean.json</span>. Asegúrate de que el archivo existe y es un JSON válido.</p>
         </div>
-        <div class="chart-container">
-          <div class="chart-wrapper">
-            <canvas id="main-chart"></canvas>
-          </div>
-        </div>
-      </section>
-
-      <section class="calc-section">
-        <div class="section-header">
-          <h2 class="section-title">🍩 Distribució de Costos Anual</h2>
-        </div>
-        <div class="chart-container">
-          <div class="chart-wrapper" style="height:300px;">
-            <canvas id="cost-chart"></canvas>
-          </div>
-        </div>
-      </section>
-
-      <section class="calc-section">
-        <div class="section-header">
-          <h2 class="section-title">📋 Detall Mensual</h2>
-        </div>
-        <div class="data-table-wrapper">
-          <table class="data-table">
-            <thead id="table-head">
-              <tr>
-                <th>Mes</th>
-                <th>Consum</th>
-                <th>Cost</th>
-                <th>Nivell</th>
-              </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-          </table>
-        </div>
-      </section>
 
     </main>
 
-    <footer class="main-footer">
-      <div class="container">
-        <p>🌿 Calculadora ITB — Calculadora Energètica · Fase 3 · Dades: <code>dataclean.json</code></p>
-      </div>
-    </footer>
+    <script>
+        /**
+         * Función principal para cargar y renderizar los datos
+         */
+        async function loadData() {
+            const loadingEl = document.getElementById('loading-state');
+            const contentEl = document.getElementById('content-area');
+            const errorEl = document.getElementById('error-state');
+            const tableBody = document.getElementById('data-table-body');
+            const tableHeaders = document.getElementById('table-headers');
 
-  </div>
+            try {
+                // Hacemos el "link" al archivo externo
+                const response = await fetch('dataclean.json');
 
-  <script src="js/calculator.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/app.js"></script>
+                if (!response.ok) throw new Error('Error al cargar el archivo');
+
+                const data = await response.json();
+
+                if (data.length > 0) {
+                    // 1. Generar encabezados basados en las llaves del primer objeto
+                    const keys = Object.keys(data[0]);
+                    keys.forEach(key => {
+                        const th = document.createElement('th');
+                        th.className = "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider";
+                        th.textContent = key;
+                        tableHeaders.appendChild(th);
+                    });
+
+                    // 2. Generar las filas
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-gray-50 transition-colors";
+
+                        keys.forEach(key => {
+                            const td = document.createElement('td');
+                            td.className = "px-6 py-4 whitespace-nowrap text-sm text-gray-600";
+                            td.textContent = item[key];
+                            tr.appendChild(td);
+                        });
+
+                        tableBody.appendChild(tr);
+                    });
+
+                    // Mostrar contenido
+                    loadingEl.classList.add('hidden');
+                    contentEl.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                loadingEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        // Ejecutar la carga al iniciar
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+
 </body>
 </html>
