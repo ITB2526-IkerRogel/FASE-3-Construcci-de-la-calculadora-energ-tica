@@ -1,0 +1,404 @@
+{
+  "centre": {
+    "nom": "Centre Educatiu Model",
+    "alumnes": 450,
+    "personal": 45,
+    "superficie_m2": 3200,
+    "any_referencia": 2025
+  },
+  "indicadors": {
+    "electricitat": {
+      "nom": "Electricitat",
+      "unitat": "kWh",
+      "cost_unitari": 0.18,
+      "moneda": "€",
+      "icona": "⚡",
+      "color": "#f59e0b",
+      "consum_mensual_base": {
+        "gener": 4200,
+        "febrer": 3900,
+        "marc": 3400,
+        "abril": 2800,
+        "maig": 2600,
+        "juny": 3100,
+        "juliol": 1200,
+        "agost": 800,
+        "setembre": 3200,
+        "octubre": 3000,
+        "novembre": 3600,
+        "desembre": 4100
+      },
+      "factors_estacionals": {
+        "gener": 1.15,
+        "febrer": 1.10,
+        "marc": 0.95,
+        "abril": 0.85,
+        "maig": 0.80,
+        "juny": 0.90,
+        "juliol": 0.40,
+        "agost": 0.25,
+        "setembre": 0.95,
+        "octubre": 0.90,
+        "novembre": 1.05,
+        "desembre": 1.12
+      },
+      "variabilitat_percentual": 8,
+      "tendencia_anual_percent": 2.5,
+      "emissions_kg_co2_per_unitat": 0.25
+    },
+    "aigua": {
+      "nom": "Aigua",
+      "unitat": "m³",
+      "cost_unitari": 2.85,
+      "moneda": "€",
+      "icona": "💧",
+      "color": "#3b82f6",
+      "consum_mensual_base": {
+        "gener": 120,
+        "febrer": 115,
+        "marc": 130,
+        "abril": 140,
+        "maig": 160,
+        "juny": 185,
+        "juliol": 95,
+        "agost": 60,
+        "setembre": 170,
+        "octubre": 145,
+        "novembre": 125,
+        "desembre": 110
+      },
+      "factors_estacionals": {
+        "gener": 0.80,
+        "febrer": 0.78,
+        "marc": 0.88,
+        "abril": 0.95,
+        "maig": 1.10,
+        "juny": 1.25,
+        "juliol": 0.65,
+        "agost": 0.40,
+        "setembre": 1.15,
+        "octubre": 1.00,
+        "novembre": 0.85,
+        "desembre": 0.75
+      },
+      "variabilitat_percentual": 10,
+      "tendencia_anual_percent": 1.8,
+      "emissions_kg_co2_per_unitat": 0.34
+    },
+    "consumibles_oficina": {
+      "nom": "Consumibles d'Oficina",
+      "unitat": "€",
+      "cost_unitari": 1,
+      "moneda": "€",
+      "icona": "📎",
+      "color": "#8b5cf6",
+      "consum_mensual_base": {
+        "gener": 680,
+        "febrer": 620,
+        "marc": 590,
+        "abril": 550,
+        "maig": 530,
+        "juny": 710,
+        "juliol": 180,
+        "agost": 120,
+        "setembre": 850,
+        "octubre": 640,
+        "novembre": 600,
+        "desembre": 560
+      },
+      "factors_estacionals": {
+        "gener": 1.05,
+        "febrer": 0.95,
+        "marc": 0.90,
+        "abril": 0.85,
+        "maig": 0.82,
+        "juny": 1.10,
+        "juliol": 0.28,
+        "agost": 0.18,
+        "setembre": 1.30,
+        "octubre": 0.98,
+        "novembre": 0.92,
+        "desembre": 0.86
+      },
+      "variabilitat_percentual": 12,
+      "tendencia_anual_percent": 1.5,
+      "emissions_kg_co2_per_unitat": 0.02,
+      "detall_categories": {
+        "paper": 0.40,
+        "tinta_toner": 0.30,
+        "material_escriptura": 0.15,
+        "altres": 0.15
+      }
+    },
+    "productes_neteja": {
+      "nom": "Productes de Neteja",
+      "unitat": "€",
+      "cost_unitari": 1,
+      "moneda": "€",
+      "icona": "🧹",
+      "color": "#10b981",
+      "consum_mensual_base": {
+        "gener": 420,
+        "febrer": 390,
+        "marc": 380,
+        "abril": 370,
+        "maig": 360,
+        "juny": 410,
+        "juliol": 280,
+        "agost": 220,
+        "setembre": 450,
+        "octubre": 400,
+        "novembre": 395,
+        "desembre": 405
+      },
+      "factors_estacionals": {
+        "gener": 1.05,
+        "febrer": 0.98,
+        "marc": 0.95,
+        "abril": 0.93,
+        "maig": 0.90,
+        "juny": 1.03,
+        "juliol": 0.70,
+        "agost": 0.55,
+        "setembre": 1.13,
+        "octubre": 1.00,
+        "novembre": 0.99,
+        "desembre": 1.02
+      },
+      "variabilitat_percentual": 6,
+      "tendencia_anual_percent": 1.2,
+      "emissions_kg_co2_per_unitat": 0.03,
+      "detall_categories": {
+        "desinfectants": 0.35,
+        "detergents": 0.25,
+        "productes_terra": 0.20,
+        "paper_higiene": 0.15,
+        "altres": 0.05
+      }
+    }
+  },
+  "despeses_fixes": {
+    "manteniment": {
+      "nom": "Manteniment General",
+      "cost_mensual_base": 850,
+      "variabilitat_percentual": 5,
+      "icona": "🔧"
+    },
+    "escombraries": {
+      "nom": "Gestió de Residus",
+      "cost_mensual_base": 320,
+      "variabilitat_percentual": 3,
+      "icona": "♻️"
+    }
+  },
+  "reduccions": {
+    "electricitat": {
+      "accions": [
+        {
+          "id": "led",
+          "nom": "Substitució a LED",
+          "descripcio": "Canviar tota la il·luminació a tecnologia LED d'alta eficiència.",
+          "reduccio_percent": 12,
+          "inversio": 8500,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 3,
+          "economia_circular": true
+        },
+        {
+          "id": "sensors",
+          "nom": "Sensors de presència",
+          "descripcio": "Instal·lar sensors de moviment a passadissos, lavabos i zones comunes.",
+          "reduccio_percent": 8,
+          "inversio": 3200,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 2,
+          "economia_circular": false
+        },
+        {
+          "id": "hvac",
+          "nom": "Optimització HVAC",
+          "descripcio": "Programar climatització amb termòstats intel·ligents i manteniment preventiu.",
+          "reduccio_percent": 10,
+          "inversio": 5600,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 4,
+          "economia_circular": false
+        },
+        {
+          "id": "solar",
+          "nom": "Panells solars fotovoltaics",
+          "descripcio": "Instal·lació de 15kWp al terrat per autoconsum.",
+          "reduccio_percent": 15,
+          "inversio": 18000,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 8,
+          "economia_circular": true
+        }
+      ]
+    },
+    "aigua": {
+      "accions": [
+        {
+          "id": "aixetes",
+          "nom": "Aixetes de baix cabal",
+          "descripcio": "Instal·lar reductors de cabal i polsadors temporitzats a tots els lavabos.",
+          "reduccio_percent": 15,
+          "inversio": 2100,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 2,
+          "economia_circular": false
+        },
+        {
+          "id": "cisternes",
+          "nom": "Cisternes de doble descàrrega",
+          "descripcio": "Substituir cisternes convencionals per models de doble descàrrega (3/6L).",
+          "reduccio_percent": 10,
+          "inversio": 3800,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 3,
+          "economia_circular": false
+        },
+        {
+          "id": "pluvial",
+          "nom": "Recollida d'aigua pluvial",
+          "descripcio": "Sistema de recollida i emmagatzematge d'aigua de pluja per a reg i neteja.",
+          "reduccio_percent": 12,
+          "inversio": 6500,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 5,
+          "economia_circular": true
+        },
+        {
+          "id": "reg_gota",
+          "nom": "Reg per degoteig automatitzat",
+          "descripcio": "Sistema de reg eficient amb sensors d'humitat al sòl.",
+          "reduccio_percent": 8,
+          "inversio": 2800,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 4,
+          "economia_circular": true
+        }
+      ]
+    },
+    "consumibles_oficina": {
+      "accions": [
+        {
+          "id": "digitalitzacio",
+          "nom": "Digitalització documental",
+          "descripcio": "Implementar gestió documental digital per reduir impressions un 60%.",
+          "reduccio_percent": 18,
+          "inversio": 4200,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 2,
+          "economia_circular": true
+        },
+        {
+          "id": "paper_reciclat",
+          "nom": "Paper 100% reciclat",
+          "descripcio": "Utilitzar exclusivament paper reciclat i impressió a doble cara per defecte.",
+          "reduccio_percent": 8,
+          "inversio": 300,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 1,
+          "economia_circular": true
+        },
+        {
+          "id": "toner_recarrega",
+          "nom": "Tòners recarregables",
+          "descripcio": "Canviar a sistema de tòners recarregables i compatibles certificats.",
+          "reduccio_percent": 6,
+          "inversio": 800,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 1,
+          "economia_circular": true
+        },
+        {
+          "id": "compra_responsable",
+          "nom": "Compra responsable centralitzada",
+          "descripcio": "Centralitzar compres, eliminar duplicitats i prioritzar productes durables.",
+          "reduccio_percent": 5,
+          "inversio": 0,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 0,
+          "economia_circular": true
+        }
+      ]
+    },
+    "productes_neteja": {
+      "accions": [
+        {
+          "id": "eco_productes",
+          "nom": "Productes ecològics concentrats",
+          "descripcio": "Canviar a productes de neteja ecològics concentrats que redueixen envasos un 70%.",
+          "reduccio_percent": 12,
+          "inversio": 500,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 1,
+          "economia_circular": true
+        },
+        {
+          "id": "dosificadors",
+          "nom": "Dosificadors automàtics",
+          "descripcio": "Instal·lar dosificadors automàtics per evitar el malbaratament de producte.",
+          "reduccio_percent": 10,
+          "inversio": 1800,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 2,
+          "economia_circular": false
+        },
+        {
+          "id": "microfibre",
+          "nom": "Sistema de microfibra",
+          "descripcio": "Substituir draps d'un sol ús per bayetes de microfibra reutilitzables.",
+          "reduccio_percent": 8,
+          "inversio": 600,
+          "any_implementacio": 2,
+          "amortitzacio_anys": 2,
+          "economia_circular": true
+        },
+        {
+          "id": "formacio",
+          "nom": "Formació en neteja eficient",
+          "descripcio": "Formar el personal de neteja en tècniques d'ús eficient de productes.",
+          "reduccio_percent": 5,
+          "inversio": 400,
+          "any_implementacio": 1,
+          "amortitzacio_anys": 0,
+          "economia_circular": false
+        }
+      ]
+    }
+  },
+  "cronograma": {
+    "any_1": {
+      "nom": "Any 1 — Fonaments",
+      "objectiu_reduccio_percent": 10,
+      "trimestres": {
+        "T1": "Auditoria inicial, instal·lació LED, aixetes baix cabal",
+        "T2": "Digitalització, productes eco, sensors presència",
+        "T3": "Cisternes doble descàrrega, paper reciclat, dosificadors",
+        "T4": "Avaluació resultats primer any, ajustos"
+      }
+    },
+    "any_2": {
+      "nom": "Any 2 — Consolidació",
+      "objectiu_reduccio_percent": 20,
+      "trimestres": {
+        "T1": "Optimització HVAC, recollida pluvial",
+        "T2": "Panells solars, tòners recarregables",
+        "T3": "Reg per degoteig, microfibra, compra responsable",
+        "T4": "Seguiment i optimització de sistemes"
+      }
+    },
+    "any_3": {
+      "nom": "Any 3 — Excel·lència",
+      "objectiu_reduccio_percent": 30,
+      "trimestres": {
+        "T1": "Consolidació de totes les mesures",
+        "T2": "Optimització avançada basada en dades",
+        "T3": "Certificació ambiental del centre",
+        "T4": "Avaluació final i planificació futura"
+      }
+    }
+  }
+}

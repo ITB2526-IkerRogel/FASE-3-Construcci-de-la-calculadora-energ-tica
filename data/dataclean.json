@@ -1,0 +1,418 @@
+{
+  "centre": "Institut Tecnològic de Barcelona (ITB)",
+  "periode": "2024-2025",
+  "font": "ITB Leaks - Factures, albarans i informes filtrats",
+  "indicadors": [
+    "consum_aigua",
+    "consum_electric_solar",
+    "consumibles_oficina",
+    "productes_neteja",
+    "telecomunicacions",
+    "manteniment"
+  ],
+
+  "consum_aigua": {
+    "descripcio": "Consum horari d'aigua al centre (litres), obtingut de gràfiques de comptador intel·ligent",
+    "unitat": "litres",
+    "dades": [
+      {
+        "data": "2024-02-25",
+        "consum_total_diari_estimat_L": 4780,
+        "mostra_horaria": [
+          { "hora": "00:00", "litres": 175 },
+          { "hora": "01:00", "litres": 190 },
+          { "hora": "02:00", "litres": 190 },
+          { "hora": "03:00", "litres": 193 },
+          { "hora": "04:00", "litres": 150 },
+          { "hora": "05:00", "litres": 200 },
+          { "hora": "06:00", "litres": 205 },
+          { "hora": "07:00", "litres": 200 },
+          { "hora": "08:00", "litres": 200 },
+          { "hora": "09:00", "litres": 220 },
+          { "hora": "10:00", "litres": 215 },
+          { "hora": "11:00", "litres": 235 },
+          { "hora": "12:00", "litres": 207 },
+          { "hora": "13:00", "litres": 235 },
+          { "hora": "14:00", "litres": 255 },
+          { "hora": "15:00", "litres": 305 },
+          { "hora": "16:00", "litres": 200 },
+          { "hora": "17:00", "litres": 190 },
+          { "hora": "18:00", "litres": 178 },
+          { "hora": "19:00", "litres": 175 },
+          { "hora": "20:00", "litres": 175 },
+          { "hora": "21:00", "litres": 180 },
+          { "hora": "22:00", "litres": 182 },
+          { "hora": "23:00", "litres": 248 }
+        ],
+        "pic_maxim": { "hora": "15:00", "litres": 305 },
+        "observacions": "Consum elevat a les 15h (franja d'activitat). Consum nocturn baix però no zero (possible fuita o canonades)."
+      },
+      {
+        "data": "2024-02-28",
+        "consum_total_diari_estimat_L": 7800,
+        "mostra_horaria": [
+          { "hora": "00:00", "litres": 205 },
+          { "hora": "01:00", "litres": 154 },
+          { "hora": "02:00", "litres": 130 },
+          { "hora": "03:00", "litres": 155 },
+          { "hora": "04:00", "litres": 160 },
+          { "hora": "05:00", "litres": 157 },
+          { "hora": "06:00", "litres": 158 },
+          { "hora": "07:00", "litres": 275 },
+          { "hora": "08:00", "litres": 278 },
+          { "hora": "09:00", "litres": 455 },
+          { "hora": "10:00", "litres": 435 },
+          { "hora": "11:00", "litres": 390 },
+          { "hora": "12:00", "litres": 470 },
+          { "hora": "13:00", "litres": 502 },
+          { "hora": "14:00", "litres": 447 },
+          { "hora": "15:00", "litres": 400 },
+          { "hora": "16:00", "litres": 400 },
+          { "hora": "17:00", "litres": 532 },
+          { "hora": "18:00", "litres": 450 },
+          { "hora": "19:00", "litres": 407 },
+          { "hora": "20:00", "litres": 325 },
+          { "hora": "21:00", "litres": 170 },
+          { "hora": "22:00", "litres": 250 }
+        ],
+        "pic_maxim": { "hora": "17:00", "litres": 532 },
+        "observacions": "Consum molt elevat. Dia lectiu amb activitat intensa. Pics significatius des de les 9h fins les 18h."
+      },
+      {
+        "data": "2024-02-29",
+        "consum_total_diari_estimat_L": 3800,
+        "mostra_horaria": [
+          { "hora": "00:00", "litres": 175 },
+          { "hora": "01:00", "litres": 150 },
+          { "hora": "02:00", "litres": 160 },
+          { "hora": "03:00", "litres": 165 },
+          { "hora": "04:00", "litres": 168 },
+          { "hora": "05:00", "litres": 172 },
+          { "hora": "06:00", "litres": 175 },
+          { "hora": "07:00", "litres": 178 },
+          { "hora": "08:00", "litres": 300 },
+          { "hora": "09:00", "litres": 298 },
+          { "hora": "10:00", "litres": 438 },
+          { "hora": "11:00", "litres": 502 },
+          { "hora": "12:00", "litres": 450 }
+        ],
+        "pic_maxim": { "hora": "11:00", "litres": 502 },
+        "observacions": "Dades parcials (fins migdia). Patró similar als altres dies lectius."
+      }
+    ],
+    "resum": {
+      "consum_nocturn_base_L_hora": 160,
+      "consum_diurn_pic_L_hora": 532,
+      "anomalia_detectada": "Consum nocturn constant suggereix possible fuita o consum continu no justificat"
+    }
+  },
+
+  "consum_electric_solar": {
+    "descripcio": "Dades de la instal·lació fotovoltaica del centre (panells solars). Informe Plant Report gener 2025.",
+    "unitat": "kWh",
+    "capacitat_instal·lada_kWp": 30.94,
+    "dades_gener_2025": [
+      { "data": "2025-01-01", "produccio_kWh": 42.56, "consum_kWh": 157.47, "autoconsum_kWh": 39.94, "importat_xarxa_kWh": 117.53, "exportat_kWh": 2.62, "taxa_autoconsum_%": 93.84, "CO2_evitat_t": 0.02 },
+      { "data": "2025-01-02", "produccio_kWh": 48.86, "consum_kWh": 159.55, "autoconsum_kWh": 45.43, "importat_xarxa_kWh": 114.12, "exportat_kWh": 3.43, "taxa_autoconsum_%": 92.98, "CO2_evitat_t": 0.023 },
+      { "data": "2025-01-03", "produccio_kWh": 36.48, "consum_kWh": 189.50, "autoconsum_kWh": 36.26, "importat_xarxa_kWh": 153.24, "exportat_kWh": 0.22, "taxa_autoconsum_%": 99.40, "CO2_evitat_t": 0.017 },
+      { "data": "2025-01-04", "produccio_kWh": 44.18, "consum_kWh": 201.76, "autoconsum_kWh": 43.75, "importat_xarxa_kWh": 158.01, "exportat_kWh": 0.43, "taxa_autoconsum_%": 99.03, "CO2_evitat_t": 0.021 },
+      { "data": "2025-01-05", "produccio_kWh": 41.99, "consum_kWh": 199.49, "autoconsum_kWh": 41.85, "importat_xarxa_kWh": 157.64, "exportat_kWh": 0.14, "taxa_autoconsum_%": 99.67, "CO2_evitat_t": 0.02 },
+      { "data": "2025-01-06", "produccio_kWh": 40.55, "consum_kWh": 191.55, "autoconsum_kWh": 37.92, "importat_xarxa_kWh": 153.63, "exportat_kWh": 2.63, "taxa_autoconsum_%": 93.51, "CO2_evitat_t": 0.019 },
+      { "data": "2025-01-07", "produccio_kWh": 53.26, "consum_kWh": 200.19, "autoconsum_kWh": 51.36, "importat_xarxa_kWh": 148.83, "exportat_kWh": 1.90, "taxa_autoconsum_%": 96.43, "CO2_evitat_t": 0.025 },
+      { "data": "2025-01-08", "produccio_kWh": 47.81, "consum_kWh": 467.60, "autoconsum_kWh": 47.81, "importat_xarxa_kWh": 419.79, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.023 },
+      { "data": "2025-01-09", "produccio_kWh": 52.03, "consum_kWh": 461.78, "autoconsum_kWh": 52.03, "importat_xarxa_kWh": 409.75, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.025 },
+      { "data": "2025-01-10", "produccio_kWh": 49.33, "consum_kWh": 425.97, "autoconsum_kWh": 49.33, "importat_xarxa_kWh": 376.64, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.023 },
+      { "data": "2025-01-11", "produccio_kWh": 40.03, "consum_kWh": 201.40, "autoconsum_kWh": 38.54, "importat_xarxa_kWh": 162.86, "exportat_kWh": 1.49, "taxa_autoconsum_%": 96.28, "CO2_evitat_t": 0.019 },
+      { "data": "2025-01-12", "produccio_kWh": 57.00, "consum_kWh": 214.71, "autoconsum_kWh": 55.13, "importat_xarxa_kWh": 159.58, "exportat_kWh": 1.87, "taxa_autoconsum_%": 96.72, "CO2_evitat_t": 0.027 },
+      { "data": "2025-01-13", "produccio_kWh": 55.89, "consum_kWh": 491.00, "autoconsum_kWh": 55.89, "importat_xarxa_kWh": 435.11, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.027 },
+      { "data": "2025-01-14", "produccio_kWh": 57.49, "consum_kWh": 484.29, "autoconsum_kWh": 57.49, "importat_xarxa_kWh": 426.80, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.027 },
+      { "data": "2025-01-15", "produccio_kWh": 55.58, "consum_kWh": 479.75, "autoconsum_kWh": 55.58, "importat_xarxa_kWh": 424.17, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.026 },
+      { "data": "2025-01-16", "produccio_kWh": 40.94, "consum_kWh": 490.80, "autoconsum_kWh": 40.94, "importat_xarxa_kWh": 449.86, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.019 },
+      { "data": "2025-01-17", "produccio_kWh": 52.90, "consum_kWh": 430.68, "autoconsum_kWh": 52.90, "importat_xarxa_kWh": 377.78, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.025 },
+      { "data": "2025-01-18", "produccio_kWh": 56.17, "consum_kWh": 198.59, "autoconsum_kWh": 53.00, "importat_xarxa_kWh": 145.59, "exportat_kWh": 3.17, "taxa_autoconsum_%": 94.36, "CO2_evitat_t": 0.027 },
+      { "data": "2025-01-19", "produccio_kWh": 35.53, "consum_kWh": 202.16, "autoconsum_kWh": 35.33, "importat_xarxa_kWh": 166.83, "exportat_kWh": 0.20, "taxa_autoconsum_%": 99.44, "CO2_evitat_t": 0.017 },
+      { "data": "2025-01-20", "produccio_kWh": 32.00, "consum_kWh": 488.39, "autoconsum_kWh": 32.00, "importat_xarxa_kWh": 456.39, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.015 },
+      { "data": "2025-01-21", "produccio_kWh": 30.24, "consum_kWh": 500.34, "autoconsum_kWh": 30.24, "importat_xarxa_kWh": 470.10, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.014 },
+      { "data": "2025-01-22", "produccio_kWh": 5.87, "consum_kWh": 165.55, "autoconsum_kWh": 5.87, "importat_xarxa_kWh": 159.68, "exportat_kWh": 0.00, "taxa_autoconsum_%": 100.00, "CO2_evitat_t": 0.003 }
+    ],
+    "resum_gener_2025": {
+      "produccio_total_kWh": 927.69,
+      "consum_total_kWh": 7802.52,
+      "autoconsum_total_kWh": 906.41,
+      "importat_xarxa_total_kWh": 6922.13,
+      "CO2_evitat_total_t": 0.441,
+      "cobertura_solar_mitjana_%": 11.88,
+      "observacions": "Els panells solars cobreixen aprox. el 12% del consum total. Dies laborables (08-17) el consum és molt superior als caps de setmana. Consum lectiu vs no lectiu mostra una diferència significativa (>400 kWh vs ~160 kWh)."
+    }
+  },
+
+  "consumibles_oficina": {
+    "descripcio": "Compres de material d'oficina (paper, retoladors, borradors) via proveïdors Lyreco",
+    "dades": [
+      {
+        "factura": "F035",
+        "data": "2024-06-19",
+        "proveidor": "Lyreco",
+        "items": [
+          { "descripcio": "Recambio marcador pizarra blanca negro", "quantitat": 40, "preu_unit": 0.71, "total": 28.40 }
+        ],
+        "total_factura_EUR": 28.40,
+        "IVA_%": 21
+      },
+      {
+        "factura": "F036",
+        "data": "2024-04-30",
+        "proveidor": "Lyreco",
+        "items": [
+          { "descripcio": "PK10 recambios borrador Faibo", "quantitat": 1, "preu_unit": 5.60, "total": 5.60 },
+          { "descripcio": "Borrador no magnético Faibo plast gris", "quantitat": 6, "preu_unit": 6.83, "total": 40.98 },
+          { "descripcio": "500H papel Navigator Universal A4 80g", "quantitat": 15, "preu_unit": 5.34, "total": 80.10 },
+          { "descripcio": "Marcador piz BCA Pilot BEgreen 2,3mm verde", "quantitat": 25, "preu_unit": 0.89, "total": 22.25 },
+          { "descripcio": "Marcador piz BCA Pilot BEgreen 2,3mm rojo", "quantitat": 30, "preu_unit": 0.89, "total": 26.70 },
+          { "descripcio": "Marcador piz BCA Pilot BEgreen 2,3mm negro", "quantitat": 30, "preu_unit": 0.89, "total": 26.70 },
+          { "descripcio": "Marcador piz BCA Pilot BEgreen 2,3mm azul", "quantitat": 30, "preu_unit": 0.89, "total": 26.70 }
+        ],
+        "total_net_EUR": 229.03,
+        "IVA_EUR": 48.10,
+        "total_factura_EUR": 277.13,
+        "IVA_%": 21
+      },
+      {
+        "factura": "F036b",
+        "data": "2024-05-31",
+        "proveidor": "Lyreco",
+        "items": [
+          { "descripcio": "Recambio marcador pizarra blanca verde", "quantitat": 30, "preu_unit": 0.91, "total": 27.30 },
+          { "descripcio": "Recambio marcador pizarra blanca azul", "quantitat": 40, "preu_unit": 0.71, "total": 28.40 },
+          { "descripcio": "500H papel Navigator Universal A4 80g", "quantitat": 30, "preu_unit": 5.34, "total": 160.20 }
+        ],
+        "total_net_EUR": 215.90,
+        "IVA_EUR": 45.34,
+        "total_factura_EUR": 261.24,
+        "IVA_%": 21
+      },
+      {
+        "factura": "F036c",
+        "data": "2024-10-31",
+        "proveidor": "Lyreco",
+        "items": [
+          { "descripcio": "500H papel Navigator Universal A4 80g", "quantitat": 20, "preu_unit": 5.47, "total": 109.40 },
+          { "descripcio": "500H papel Navigator Universal A4 80g", "quantitat": 10, "preu_unit": 5.47, "total": 54.70 }
+        ],
+        "total_net_EUR": 164.10,
+        "IVA_EUR": 34.46,
+        "total_factura_EUR": 198.56,
+        "IVA_%": 21
+      }
+    ],
+    "resum": {
+      "total_gastat_EUR": 765.33,
+      "paper_A4_resmes_total": 105,
+      "retoladors_pissarra_unitats": 185,
+      "observacio": "Consum elevat de paper (105 resmes en ~6 mesos). Els retoladors BEgreen son línea eco (75% tinta reciclada)."
+    }
+  },
+
+  "productes_neteja": {
+    "descripcio": "Compres de productes de neteja i higiene (paper WC, paper mans, bosses, sabó)",
+    "dades": [
+      {
+        "factura": "F055",
+        "data": "2024-06-20",
+        "proveidor": "ITB Leaks Neteges",
+        "items": [
+          { "descripcio": "10 fardos paper secamans (18,25€/fardo)", "quantitat": 1, "preu_unit": 182.50, "total": 182.50 },
+          { "descripcio": "20 sacos industrials (1,51€/saco)", "quantitat": 1, "preu_unit": 30.20, "total": 30.20 },
+          { "descripcio": "30 bolsas basura pequeñas (1,13€/bolsa)", "quantitat": 1, "preu_unit": 33.90, "total": 33.90 },
+          { "descripcio": "10 fardos papel wc industrial (25,67€/fardo)", "quantitat": 1, "preu_unit": 256.70, "total": 256.70 },
+          { "descripcio": "5 fardos papel secamanos mecha (18,25€/fardo)", "quantitat": 1, "preu_unit": 91.25, "total": 91.25 },
+          { "descripcio": "3 garrafas jabón manos 5l (8,50€/garrafa)", "quantitat": 1, "preu_unit": 25.50, "total": 25.50 }
+        ],
+        "base_EUR": 620.05,
+        "IVA_10_EUR": 0.00,
+        "IVA_21_EUR": 130.21,
+        "total_factura_EUR": 750.26,
+        "forma_pago": "Recibo domiciliado 26/06/2024"
+      },
+      {
+        "factura": "F056",
+        "data": "2024-05-27",
+        "proveidor": "ITB Leaks Neteges",
+        "items": [
+          { "descripcio": "Limpieza jardín, patios i entrada (20/04/2024)", "quantitat": 1, "preu_unit": 668.80, "total": 668.80 },
+          { "descripcio": "Transporte y deixalleria", "quantitat": 1, "preu_unit": 208.60, "total": 208.60 },
+          { "descripcio": "Bolsa de horas especialistas licitación (30h)", "quantitat": 1, "preu_unit": -501.60, "total": -501.60 }
+        ],
+        "base_EUR": 375.80,
+        "IVA_21_EUR": 78.92,
+        "total_factura_EUR": 454.72,
+        "forma_pago": "Recibo domiciliado 26/06/2024"
+      }
+    ],
+    "resum": {
+      "total_gastat_EUR": 1204.98,
+      "paper_WC_fardos": 10,
+      "paper_secamans_fardos": 15,
+      "sabo_mans_litres": 15,
+      "bosses_industrials": 20,
+      "bosses_petites": 30,
+      "observacio": "Consum intensiu de paper d'un sol ús (WC i secamans). Oportunitat de reducció amb assecadors d'aire."
+    }
+  },
+
+  "telecomunicacions": {
+    "descripcio": "Factures de connectivitat internet del centre",
+    "dades": [
+      {
+        "factura": "F078-DIGI",
+        "mes": "2024-05",
+        "proveidor": "DIGI",
+        "servei": "Fibra 1Gb EN CASA",
+        "base_imponible_EUR": 24.79,
+        "IVA_21_EUR": 5.21,
+        "total_EUR": 30.00,
+        "observacio": "Línia fibra òptica 1Gb simètric"
+      },
+      {
+        "factura": "F078-DIGI-2",
+        "mes": "2024-05",
+        "proveidor": "DIGI",
+        "servei": "Fibra 1Gb EN CASA",
+        "base_imponible_EUR": 24.79,
+        "IVA_21_EUR": 5.21,
+        "total_EUR": 30.00,
+        "observacio": "Possible segona línia o duplicat de factura"
+      },
+      {
+        "factura": "F294-O2",
+        "mes": "2024-03",
+        "periode": "2024-01-18 a 2024-02-17",
+        "proveidor": "O2 (Telefónica)",
+        "servei": "Fibra 1Gb + Mòbil 200GB",
+        "numero_movil": "639852752",
+        "base_imponible_EUR": 41.32,
+        "IVA_21_EUR": 8.68,
+        "total_EUR": 50.00,
+        "inclou": ["Fibra 1Gb simètrica", "Línia fixa amb trucades il·limitades", "Mòbil 200GB dades", "Trucades il·limitades", "SMS il·limitats", "Roaming UE"]
+      }
+    ],
+    "resum": {
+      "cost_mensual_telecomunicacions_EUR": 80.00,
+      "cost_anual_estimat_EUR": 960.00,
+      "proveidors": ["DIGI", "O2"],
+      "observacio": "El centre disposa de dues línies de fibra (DIGI 1Gb i O2 1Gb). Cost mensual ~80€/mes."
+    }
+  },
+
+  "manteniment": {
+    "descripcio": "Factures de serveis extraordinaris de manteniment (elèctric, climatització, fusteria/ferreria)",
+    "dades": [
+      {
+        "factura": "F327",
+        "data": "2024-05-23",
+        "proveidor": "Empresa manteniment elèctric",
+        "servei": "Serveis extraordinaris - Instal·lació elèctrica",
+        "descripcio_detallada": "Eliminar circuits obsolets QGP. Nou OGP mantenint 8+8 interruptors amb control lumínic 16 mòduls, DIF i tèrmic trifàsic, DIF i tèrmic monofàsic muntats sobre nou armari amb espai de reserva, posada en marxa i comprovacions.",
+        "base_imponible_EUR": 2105.80,
+        "IVA_21_EUR": 442.22,
+        "total_EUR": 2548.02,
+        "venciment": "2024-06-01"
+      },
+      {
+        "factura": "F328",
+        "data": "2024-09-13",
+        "proveidor": "Empresa manteniment",
+        "servei": "Serveis extraordinaris - Fusteria i Ferreria",
+        "descripcio_detallada": "Treballs en ferro i fusta sol·licitats per Direcció (portes i baranes malmeses). Realitzats entre el dia 5/9 i 9/9 per dos oficials especialitzats.",
+        "items": [
+          { "descripcio": "Serveis extraordinaris mà d'obra", "total": 575.00 },
+          { "descripcio": "Compra material ferro (tub 60mm, pletines, talls i tornilleria)", "total": 132.93 },
+          { "descripcio": "Compra materials fusta (tapetes, batents, DM's, junquillos, monta-kit, tornilleria)", "total": 129.24 }
+        ],
+        "base_imponible_EUR": 837.17,
+        "IVA_21_EUR": 175.81,
+        "total_EUR": 1012.98,
+        "venciment": "2024-10-01"
+      },
+      {
+        "factura": "F039-NP",
+        "data": "2024-07-05",
+        "proveidor": "Empresa climatització",
+        "servei": "Servei d'urgència - Reparació AACC",
+        "descripcio_detallada": "Reparació d'urgència d'AACC. Compressor 400W + sonda temperatura + neteja de filtres i bescanviador de calor de la unitat exterior. Temps de treball, desplaçaments i subministraments inclosos.",
+        "base_imponible_EUR": 288.00,
+        "IVA_21_EUR": 60.48,
+        "total_EUR": 348.48,
+        "venciment": "2024-08-01"
+      }
+    ],
+    "resum": {
+      "total_gastat_manteniment_EUR": 3909.48,
+      "categories": {
+        "electric_EUR": 2548.02,
+        "climatitzacio_EUR": 348.48,
+        "fusteria_ferreria_EUR": 1012.98
+      },
+      "observacio": "Les reparacions elèctriques i de climatització suposen el major cost de manteniment. La renovació del quadre elèctric pot millorar l'eficiència energètica."
+    }
+  },
+
+  "indicadors_resum": {
+    "descripcio": "Els 4 indicadors principals identificats per a la calculadora d'estalvi energètic",
+    "indicadors": [
+      {
+        "id": "IND-01",
+        "nom": "Consum d'Aigua",
+        "unitat": "litres/dia",
+        "valor_base": 5460,
+        "font": "Gràfiques comptador intel·ligent febrer 2024",
+        "ODS_relacionat": ["ODS 6 - Aigua neta i sanejament", "ODS 12 - Producció i consum responsables"],
+        "potencial_estalvi": "Reducció consum nocturn i sensibilització usuaris pot reduir 20-30%"
+      },
+      {
+        "id": "IND-02",
+        "nom": "Consum Elèctric / Energia Solar",
+        "unitat": "kWh/dia",
+        "valor_base_consum": 350.00,
+        "valor_base_produccio_solar": 47.00,
+        "cobertura_solar_%": 11.88,
+        "font": "Plant Report ITB gener 2025",
+        "ODS_relacionat": ["ODS 7 - Energia assequible i no contaminant", "ODS 13 - Acció climàtica"],
+        "potencial_estalvi": "Augment de panells solars i mesures d'eficiència podrien cobrir 30-40% del consum"
+      },
+      {
+        "id": "IND-03",
+        "nom": "Consumibles d'Oficina (paper i retoladors)",
+        "unitat": "EUR/any",
+        "valor_base_anual_estimat": 1530.66,
+        "paper_resmes_any_estimat": 210,
+        "font": "Factures Lyreco 2024",
+        "ODS_relacionat": ["ODS 12 - Producció i consum responsables", "ODS 15 - Vida de ecosistemes terrestres"],
+        "potencial_estalvi": "Digitalització i impressió responsable pot reduir el consum de paper un 50%"
+      },
+      {
+        "id": "IND-04",
+        "nom": "Productes d'Higiene i Neteja",
+        "unitat": "EUR/any",
+        "valor_base_anual_estimat": 2409.96,
+        "font": "Factures neteges 2024",
+        "ODS_relacionat": ["ODS 3 - Salut i benestar", "ODS 12 - Producció i consum responsables"],
+        "potencial_estalvi": "Instal·lació d'assecadors d'aire pot eliminar paper secamans. Productes ecològics redueixen impacte químic."
+      }
+    ]
+  },
+
+  "dades_addicionals": {
+    "us_mobils_aula": {
+      "descripcio": "Indicador social: percentatge de mòbils sobre taula a l'aula (curs 2024-2025)",
+      "grups": ["ASIXc1A", "ASIXc1B", "ASIXc1C"],
+      "resum": {
+        "ASIXc1A": { "observacions": 11, "mitjana_%": 35.14, "max_%": 57.89, "min_%": 15.00 },
+        "ASIXc1B": { "observacions": 11, "mitjana_%": 19.75, "max_%": 34.21, "min_%": 4.76 },
+        "ASIXc1C": { "observacions": 13, "mitjana_%": 40.87, "max_%": 80.56, "min_%": 11.76 }
+      },
+      "ODS_relacionat": "ODS 4 - Educació de qualitat",
+      "observacio": "El grup C té el percentatge més alt de mòbils a l'aula. Indicador de governança i benestar digital."
+    }
+  }
+}
