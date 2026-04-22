@@ -1985,14 +1985,14 @@ body {
   .calculator-layout {
     grid-template-columns: 1fr;
   }
-  
+
   .dashboard-column {
     position: relative;
     top: 0;
     order: -1; /* El dashboard sale arriba en móviles */
     margin-bottom: var(--space-xl);
   }
-  
+
   .container-wide {
     padding: 0 var(--space-md);
   }
@@ -2060,16 +2060,16 @@ body {
 
 .container-wide {
   /* Ocupa el 96% del ample de la pantalla, deixant un 2% de marge a cada costat */
-  max-width: 96%; 
+  max-width: 96%;
   margin: 0 auto;
   /* Un padding extra per si la finestra es fa molt petita */
-  padding: 0 var(--space-lg); 
+  padding: 0 var(--space-lg);
 }
 
 .calculator-layout {
   display: grid;
   /* Fem la calculadora una mica més ampla (380px) perquè es vegi millor en pantalles grans */
-  grid-template-columns: 380px 1fr; 
+  grid-template-columns: 380px 1fr;
   gap: var(--space-2xl);
   align-items: start;
 }
@@ -2134,13 +2134,13 @@ body {
   .calculator-layout {
     grid-template-columns: 1fr;
   }
-  
+
   .dashboard-column {
     position: relative;
     top: 0;
     margin-bottom: var(--space-xl);
   }
-  
+
   .container-wide {
     max-width: 100%; /* En mòbils aprofitem el 100% */
     padding: 0 var(--space-md);
@@ -2241,7 +2241,7 @@ body {
 
 .stats-footer-grid .big-number {
   /* Utilitza clamp per fer la lletra gran, però que s'encongeixi si no hi ha espai */
-  font-size: clamp(1.8rem, 4vw, 3rem); 
+  font-size: clamp(1.8rem, 4vw, 3rem);
   word-break: break-word; /* Trenca el número si és massa llarg */
 }
 
@@ -2300,7 +2300,7 @@ body {
 }
 
 .stats-footer-grid .big-number {
-  font-size: clamp(1.4rem, 3vw, 2.2rem); 
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: 5px;
@@ -2317,5 +2317,67 @@ body {
 
 /* Espacio extra al final de las acciones para que el último elemento no quede tapado por la barra */
 .actions-column {
-  padding-bottom: 150px; 
+  padding-bottom: 150px;
+}
+/* ==================================================================== */
+/* ===== MODIFICACIONS PER MINIMITZAR L'SCROLL (COMPACT MODE) ===== */
+/* ==================================================================== */
+
+/* Hero més petit a la pàgina de reducció */
+.hero-compact {
+  padding: var(--space-md) 0 var(--space-sm) !important;
+}
+.hero-compact h2 {
+  font-size: 1.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Reduir espaiats a la graella principal */
+.calculator-layout {
+  gap: var(--space-lg) !important;
+}
+
+/* Dashboard més compacte */
+.sticky-dashboard {
+  padding: 15px !important;
+  top: 75px !important;
+}
+.sticky-dashboard .impact-header h3 {
+  font-size: 1.2rem !important;
+}
+
+/* Reduir la barra inferior fixa perquè ocupi menys espai vertical */
+.stats-footer-sticky-wrapper {
+  padding: 8px 0 !important;
+  margin-top: var(--space-md) !important;
+  border-top: 1px solid var(--clean-green) !important;
+}
+.stats-footer-grid {
+  gap: 10px !important;
+}
+.stats-footer-grid .stat-highlight {
+  min-height: auto !important;
+  padding: 8px 15px !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  border-radius: var(--radius-sm) !important;
+}
+.stats-footer-grid .big-number {
+  font-size: 1.3rem !important;
+  margin-bottom: 0 !important;
+}
+.stats-footer-grid .stat-label {
+  font-size: 0.65rem !important;
+  text-align: left;
+}
+
+/* Espai inferior reduït per no fer scroll innecessari */
+.actions-column {
+  padding-bottom: 60px !important;
+}
+/* ===== MARGEN DE 10px EN LOS LATERALES DE LAS ACCIONES ===== */
+.reduction-card-body .interactive-action {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }

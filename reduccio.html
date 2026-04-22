@@ -29,33 +29,24 @@
       </div>
     </nav>
 
-    <section class="hero">
-      <div class="container">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          Fase 3 — Calculadora de Reducció
-        </div>
-        <h1>Calcula el teu <span class="gradient-text">impacte real</span></h1>
-        <p>Selecciona les accions i visualitza l'estalvi i la inversió en temps real al panell esquerre.</p>
-        <div class="centre-name" id="centre-name"></div>
-      </div>
+    <section class="hero hero-compact">
+        <h2>Calcula el teu <span class="gradient-text">impacte real</span></h2>
     </section>
 
     <main class="container-wide">
-      
       <div class="calculator-layout">
-        
+
         <aside class="dashboard-column">
           <div class="sticky-dashboard" id="impact-dashboard">
             </div>
         </aside>
 
         <div class="actions-column">
-          <section class="calc-section">
-            <div class="section-header">
+          <section class="calc-section" style="margin-bottom: 0;">
+            <div class="section-header" style="margin-bottom: var(--space-sm);">
               <div>
-                <h2 class="section-title">🎯 Accions de Reducció per Indicador</h2>
-                <p class="section-subtitle">Fes clic a cada acció per activar-la. L'impacte es recalcula a l'instant.</p>
+                <h2 class="section-title" style="font-size: 1.2rem;">🎯 Accions de Reducció</h2>
+                <p class="section-subtitle" style="font-size: 0.8rem;">Fes clic a cada acció per activar-la. L'impacte es recalcula a l'instant.</p>
               </div>
             </div>
             <div class="reduction-grid" id="reduction-grid">
@@ -64,7 +55,6 @@
         </div>
 
       </div>
-
     </main>
 
     <div class="stats-footer-sticky-wrapper">
@@ -87,13 +77,6 @@
         </div>
       </div>
     </div>
-
-    <footer class="main-footer">
-      <div class="container">
-        <p>🌿 Calculadora ITB — Fase 3 · Dades: <a href="./data/dataclean.json" target="_blank" class="json-link"><code>dataclean.json</code></a></p>
-      </div>
-    </footer>
-
   </div>
 
   <script src="./js/calculator.js"></script>

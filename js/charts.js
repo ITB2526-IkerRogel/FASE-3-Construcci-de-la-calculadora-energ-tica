@@ -413,7 +413,81 @@ function createSavingsChart(canvasId, indicadors, percentReduccio) {
     }
   });
 }
+/**
+ * Gràfic de barres apilades dinàmic per a la pàgina de Reducció.
+ * S'actualitza en temps real amb els arrays de dades.
+ */
+function createDynamicSavingsChart(canvasId, labels, costActual, estalvi, colors) {
+  destroyChart(canvasId);
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
 
+  activeCharts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Cost post-millores',
+          data: costActual,
+          backgroundColor: colors.map(c => c + '88'),
+          borderColor: colors,
+          borderWidth: 1,
+          borderRadius: 6,
+          borderSkipped: false
+        },
+        {
+          label: 'Estalvi aconseguit',
+          data: estalvi,
+          backgroundColor: '#66bb6a55', // Verd de l'estalvi
+          borderColor: '#66bb6a',
+          borderWidth: 1,
+          borderRadius: 6,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y', // Gráfico horizontal
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: {
+            color: '#111111',
+            font: { family: 'Inter', size: 10, weight: 500 },
+            boxWidth: 10, boxHeight: 3, padding: 10
+          }
+        },
+        tooltip: {
+          ...CHART_TOOLTIP,
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${Calculator.formatCurrency(ctx.parsed.x)}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: { color: 'rgba(46, 125, 50, 0.08)' },
+          ticks: {
+            color: '#111111',
+            font: { family: 'JetBrains Mono', size: 10 },
+            callback: (v) => Calculator.formatCurrency(v)
+          }
+        },
+        y: {
+          stacked: true,
+          grid: { display: false },
+          ticks: { color: '#111111', font: { family: 'Inter', size: 10, weight: 600 } }
+        }
+      },
+      animation: { duration: 400, easing: 'easeOutQuart' } // Animación rápida para sentirlo interactivo
+    }
+  });
+}
 window.Charts = {
   createMonthlyBarChart,
   createElectricChart,
@@ -421,5 +495,6 @@ window.Charts = {
   createComparisonLineChart,
   createHourlyWaterChart,
   createSavingsChart,
+  createDynamicSavingsChart,
   destroyChart
 };
