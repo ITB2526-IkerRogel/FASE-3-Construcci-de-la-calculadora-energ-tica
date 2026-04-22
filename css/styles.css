@@ -2381,3 +2381,90 @@ body {
   margin-left: 10px !important;
   margin-right: 10px !important;
 }
+/* ==================================================================== */
+/* ===== ALINEACIÓ D'ALÇADES I MILLORA VISUAL DELS TÍTOLS ===== */
+/* ==================================================================== */
+
+/* 1. Igualar l'alçada de les dues columnes */
+.calculator-layout {
+  align-items: stretch !important;
+}
+
+.actions-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-column .calc-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0 !important;
+}
+
+.reduction-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-auto-rows: 1fr; /* Fa que les files ocupin el mateix espai */
+}
+
+.reduction-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.reduction-card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* Reparteix l'espai verticalment de forma elegant */
+}
+
+/* 2. Fer el títol principal més bonic sense fer-lo gran */
+.hero-compact {
+  padding: var(--space-md) 0 var(--space-sm) !important;
+}
+
+.hero-compact h2 {
+  font-size: 1.6rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(46, 125, 50, 0.08);
+  border: 1px solid var(--border-color);
+  text-transform: uppercase;
+}
+
+.hero-compact h2 .gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid var(--clean-green);
+}
+
+/* 3. Estilitzar el títol de "Accions de Reducció" */
+.actions-header-pretty {
+  background: linear-gradient(to right, rgba(67, 160, 71, 0.05), transparent);
+  border-left: 4px solid var(--clean-green);
+  padding: 10px 15px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: var(--space-md) !important;
+}
+
+.actions-header-pretty .section-title {
+  font-size: 1.15rem !important;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.actions-header-pretty .section-subtitle {
+  font-size: 0.8rem !important;
+  color: var(--text-muted);
+}

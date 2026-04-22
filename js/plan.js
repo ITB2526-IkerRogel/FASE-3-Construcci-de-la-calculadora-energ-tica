@@ -34,7 +34,6 @@
     renderCentreName();
     renderObjectives();
     renderTimeline();
-    renderSavingsChart();
     renderComparisonCharts();
     renderComparatives();
     renderProgressBars();
@@ -180,15 +179,6 @@
     `).join('');
   }
 
-  // ===== SAVINGS CHART =====
-  function renderSavingsChart() {
-    const mainIndicadors = {};
-    ['consum_aigua', 'consum_electric_solar', 'consumibles_oficina', 'productes_neteja'].forEach(k => {
-      if (indicadors[k]) mainIndicadors[k] = indicadors[k];
-    });
-    Charts.createSavingsChart('savings-chart', mainIndicadors, 30);
-  }
-
   // ===== COMPARISON LINE CHARTS =====
   function renderComparisonCharts() {
     const container = document.getElementById('indicator-charts');
@@ -218,7 +208,6 @@
         if (!ind) continue;
         const reduced = Calculator.calcularAmbReduccio(ind, 30);
         if (reduced) {
-          // Reordenar per curs escolar (Set → Ago)
           const mensualEscolar = Calculator.reordenarCursEscolar(ind.mensual);
           const reducedEscolar = Calculator.reordenarCursEscolar(reduced);
           Charts.createComparisonLineChart(`chart-${clau}`, mensualEscolar, reducedEscolar, ind.nom, ind.color, ind.unitatCurta);
@@ -240,7 +229,6 @@
       if (!ind) continue;
 
       const isMonetary = ind.unitat === '€';
-      // Use actual costs as baseline
       const costActual = ind.totalCostActual;
       const costProjectatIPC = ind.totalCost;
       const costReduït = costActual * 0.7;
@@ -305,10 +293,10 @@
       for (const clau of main4) {
         const ind = indicadors[clau];
         if (!ind) continue;
-        
+
         const actualCost = ind.totalCostActual;
         const estalvi = actualCost * (pctTarget / 100);
-        
+
         html += `
           <div class="progress-item">
             <div class="progress-label">
@@ -373,12 +361,6 @@
           <p style="font-size:0.8rem;font-weight:600;color:var(--ipc-orange);margin-bottom:4px;">📈 Nota IPC</p>
           <p style="font-size:0.8rem;">Si no s'apliquen les millores, l'augment de costos per IPC seria de ${Calculator.formatCurrency(estalviIPC - estalviActual)} addicionals l'any vinent. Les mesures de reducció no només estalvien sinó que protegeixen contra la inflació.</p>
         </div>
-        <ul style="margin-top:var(--space-lg);">
-          <li><strong>Reduir:</strong> Menys consum elèctric, d'aigua i material gràcies a la tecnologia i sensibilització.</li>
-          <li><strong>Reutilitzar:</strong> Bayetes de microfibra, paper per esborranys, aigua pluvial recollida al terrat.</li>
-          <li><strong>Reciclar:</strong> Paper reciclat, retoladors Pilot BEgreen (75% tinta reciclada), gestió residus.</li>
-          <li><strong>Renovar:</strong> Energia solar fotovoltaica ampliada, productes ecològics certificats, compra responsable.</li>
-        </ul>
       </div>`;
   }
 
