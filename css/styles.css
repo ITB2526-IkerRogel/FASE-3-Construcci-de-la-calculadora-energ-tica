@@ -1501,6 +1501,364 @@ body {
   font-size: 0.8rem;
 }
 
+/* ===== INTERACTIVE REDUCTION CALCULATOR ===== */
+
+/* Impact Dashboard */
+.impact-dashboard-section {
+  margin-bottom: var(--space-xl);
+}
+
+.impact-dashboard-inner {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.impact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.impact-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.impact-icon {
+  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(102, 187, 106, 0.12), rgba(66, 165, 245, 0.08));
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.impact-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.impact-header p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.impact-actions-bar {
+  display: flex;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  border-radius: 100px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+}
+
+/* Impact KPIs */
+.impact-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.impact-kpi {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.impact-kpi-value {
+  transition: all 0.3s ease;
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  transition: all 300ms ease;
+}
+
+.impact-kpi-value.positive {
+  color: var(--clean-green);
+}
+
+.impact-kpi-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Per-indicator impact breakdown */
+.impact-per-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.impact-indicator-row {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.impact-indicator-row:hover {
+  background: var(--bg-glass);
+}
+
+.impact-ind-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.impact-ind-icon {
+  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.impact-ind-icon.water { background: var(--water-blue-glow); }
+.impact-ind-icon.electric { background: var(--solar-amber-glow); }
+.impact-ind-icon.office { background: var(--office-purple-glow); }
+.impact-ind-icon.cleaning { background: var(--clean-green-glow); }
+
+.impact-ind-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.impact-ind-count {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.impact-ind-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.impact-ind-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.impact-ind-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-ind-bar-fill.water { background: var(--water-blue); }
+.impact-ind-bar-fill.electric { background: var(--solar-amber); }
+.impact-ind-bar-fill.office { background: var(--office-purple); }
+.impact-ind-bar-fill.cleaning { background: var(--clean-green); }
+
+.impact-ind-pct {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--clean-green);
+  min-width: 42px;
+  text-align: right;
+}
+
+.impact-ind-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  flex-wrap: wrap;
+}
+
+.impact-ind-detail .arrow-right {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+}
+
+.impact-ind-detail .reduced-value {
+  color: var(--clean-green);
+  font-weight: 600;
+}
+
+.impact-ind-detail .saving-badge {
+  background: rgba(102, 187, 106, 0.12);
+  color: var(--clean-green);
+  padding: 1px 8px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.65rem;
+}
+
+/* Interactive Action Items */
+.interactive-action {
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin: 0 calc(-1 * var(--space-md));
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
+}
+
+.interactive-action:hover {
+  background: var(--bg-glass-light);
+  border-color: var(--border-color);
+}
+
+.interactive-action.selected {
+  background: rgba(102, 187, 106, 0.06);
+  border-color: rgba(102, 187, 106, 0.2);
+}
+
+.interactive-action.selected .action-content h4 {
+  color: var(--clean-green);
+}
+
+.interactive-action.selected .action-toggle-visual {
+  background: var(--clean-green);
+  border-color: var(--clean-green);
+}
+
+.interactive-action.selected .action-toggle-visual::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Custom Checkbox Toggle */
+.action-toggle {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.action-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.action-toggle-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-card);
+  transition: all 200ms ease;
+}
+
+.action-toggle-visual::after {
+  content: '✓';
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.action-toggle:hover .action-toggle-visual {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.1);
+}
+
+.action-checkbox:checked + .action-toggle-visual {
+  background: var(--clean-green);
+  border-color: var(--clean-green);
+}
+
+.action-checkbox:checked + .action-toggle-visual::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Card summary inside reduction cards */
+.card-summary {
+  margin-top: var(--space-xs);
+}
+
+.card-summary-active {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--clean-green);
+  background: rgba(102, 187, 106, 0.1);
+  padding: 3px 10px;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.card-summary-inactive {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Action meta badges in interactive mode */
+.meta-reduccio {
+  background: rgba(229, 57, 53, 0.08) !important;
+  border-color: rgba(229, 57, 53, 0.15) !important;
+  color: var(--ipc-red) !important;
+}
+
+.meta-inversio {
+  background: rgba(255, 183, 77, 0.1) !important;
+  border-color: rgba(255, 183, 77, 0.2) !important;
+  color: var(--solar-amber) !important;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -1527,6 +1885,7 @@ body {
   .projected-card { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
   .comp-arrow { flex-direction: row; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-top: none; border-bottom: none; }
   .arrow-line { width: 20px; height: 2px; margin-bottom: 0; margin-right: var(--space-sm); }
+  .impact-kpis { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1551,6 +1910,9 @@ body {
   .chart-wrapper { height: 250px; }
   .quarter-grid { grid-template-columns: 1fr; }
   .ipc-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-kpis { grid-template-columns: repeat(2, 1fr); }
+  .impact-kpi-value { font-size: 1.1rem; }
+  .impact-header { flex-direction: column; }
 }
 
 @media (max-width: 480px) {
@@ -1559,10 +1921,401 @@ body {
   .result-card .result-value { font-size: 1.5rem; }
   .comp-value { font-size: 1.3rem; }
   .ipc-grid { grid-template-columns: 1fr; }
+  .impact-kpis { grid-template-columns: 1fr 1fr; }
+  .interactive-action { margin: 0; }
 }
 
 @media print {
   .bg-grid, .main-nav, .main-footer { display: none; }
   body { background: white; color: #1a1a1a; }
   .container { max-width: 100%; }
+}
+/* ===== NUEVO DISEÑO PARA REDUCCIÓN (FASE 3 - MEJORA UI) ===== */
+
+/* Contenedor más ancho para aprovechar monitores */
+.container-wide {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* Layout de dos columnas */
+.calculator-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px; /* Columna principal y lateral de 400px */
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+/* Columna lateral pegajosa */
+.dashboard-column {
+  position: sticky;
+  top: 100px; /* Se queda pegado a 100px del borde superior (debajo de la nav) */
+  height: fit-content;
+}
+
+.sticky-dashboard {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Ajustes en el dashboard para que se vea bien en vertical */
+.impact-kpis {
+  grid-template-columns: 1fr 1fr !important; /* En el lateral ponemos los KPIs en 2 columnas */
+  gap: var(--space-sm) !important;
+}
+
+.impact-header {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.impact-actions-bar {
+  margin-top: var(--space-sm);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Responsivo: Si la pantalla es pequeña, volvemos a una columna */
+@media (max-width: 1100px) {
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-column {
+    position: relative;
+    top: 0;
+    order: -1; /* El dashboard sale arriba en móviles */
+    margin-bottom: var(--space-xl);
+  }
+  
+  .container-wide {
+    padding: 0 var(--space-md);
+  }
+}
+/* Correcció de desbordament i centrat */
+.stats-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.stat-highlight {
+  padding: var(--space-xl) var(--space-md); /* Menos padding lateral para dar espacio al número */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  overflow: hidden; /* Evita que el contenido salga si es muy grande */
+}
+
+.big-number {
+  font-size: clamp(1.5rem, 4vw, 2.8rem); /* Fuente fluida: se hace pequeña si no hay espacio */
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 10px;
+  word-break: break-all; /* Rompe palabras si es necesario */
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.action-item:hover {
+  background: var(--bg-glass-light);
+}
+
+.action-item.selected {
+  background: rgba(67, 160, 114, 0.05);
+  border-color: var(--clean-green);
+}
+
+/* Calculadora Sticky Top para no perderla de vista */
+.sticky-top-dashboard {
+  position: sticky;
+  top: 80px; /* Debajo de la nav */
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .big-number {
+    font-size: 2rem;
+  }
+}
+/* ===== LAYOUT REDUCCIÓ: FULL WIDTH AMB MARGE ===== */
+
+.container-wide {
+  /* Ocupa el 96% del ample de la pantalla, deixant un 2% de marge a cada costat */
+  max-width: 96%; 
+  margin: 0 auto;
+  /* Un padding extra per si la finestra es fa molt petita */
+  padding: 0 var(--space-lg); 
+}
+
+.calculator-layout {
+  display: grid;
+  /* Fem la calculadora una mica més ampla (380px) perquè es vegi millor en pantalles grans */
+  grid-template-columns: 380px 1fr; 
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+/* Calculadora Fixa (Sticky) */
+.dashboard-column {
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+  z-index: 10;
+}
+
+.sticky-dashboard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Correccions d'Estil i Desbordament de Números (Overflow Fix) */
+.stats-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.stat-highlight {
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.big-number {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
+.interactive-action:hover {
+  background: var(--bg-glass-light) !important;
+}
+
+.interactive-action.selected {
+  background: rgba(67, 160, 114, 0.08) !important;
+  border-color: var(--clean-green) !important;
+}
+
+/* Responsive: A pantalles petites i mitjanes, torna a ser d'una columna */
+@media (max-width: 1200px) {
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-column {
+    position: relative;
+    top: 0;
+    margin-bottom: var(--space-xl);
+  }
+  
+  .container-wide {
+    max-width: 100%; /* En mòbils aprofitem el 100% */
+    padding: 0 var(--space-md);
+  }
+}
+/* ==================================================================== */
+/* ===== NOU LAYOUT REDUCCIÓ: FULL WIDTH, HARMONIA I STICKY ===== */
+/* ==================================================================== */
+
+/* Fa que la pàgina ocupi el 96% de l'ample, deixant un marge elegant */
+.container-wide {
+  max-width: 96%;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.calculator-layout {
+  display: grid;
+  /* La calculadora ocupa un 35% de l'ample (mínim 380px) perquè es vegi gran i harmònica */
+  grid-template-columns: minmax(380px, 35%) 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+/* Calculadora Fixa (Sticky) que baixa amb l'scroll */
+.dashboard-column {
+  position: sticky;
+  top: 100px; /* Es queda a 100px del sostre */
+  height: fit-content;
+  z-index: 10;
+}
+
+.sticky-dashboard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl); /* Més espai interior perquè respiri */
+  box-shadow: var(--shadow-lg);
+}
+
+/* Augmentem la mida dels textos només dins de la calculadora sticky */
+.sticky-dashboard .impact-header h3 {
+  font-size: 1.5rem !important;
+}
+
+.sticky-dashboard .impact-kpi-value {
+  /* Usa clamp para que el tamaño máximo sea 2.2rem, pero pueda encogerse hasta 1.2rem si falta espacio */
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem) !important;
+  word-break: break-word; /* Evita que el número rompa la caja horizontalmente */
+  overflow-wrap: break-word;
+  line-height: 1.1;
+}
+
+/* Añadimos esto para asegurarnos de que la caja que lo contiene se adapte bien */
+.sticky-dashboard .impact-kpi {
+  padding: var(--space-md) !important;
+  min-width: 0; /* Obliga al grid a respetar el límite de ancho */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Efecte visual de les targetes d'acció en passar el ratolí */
+.interactive-action {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.interactive-action:hover {
+  background: var(--bg-glass-light) !important;
+  border-color: var(--border-hover);
+}
+
+.interactive-action.selected {
+  background: rgba(67, 160, 114, 0.08) !important;
+  border-color: var(--clean-green) !important;
+}
+
+/* Correccions del Resum Final perquè els números no surtin del quadre */
+.stats-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.stats-footer-grid .stat-highlight {
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+  overflow: hidden; /* Evita desbordaments */
+}
+
+.stats-footer-grid .big-number {
+  /* Utilitza clamp per fer la lletra gran, però que s'encongeixi si no hi ha espai */
+  font-size: clamp(1.8rem, 4vw, 3rem); 
+  word-break: break-word; /* Trenca el número si és massa llarg */
+}
+
+/* Mode responsive: a pantalles mitjanes/petites, passa a 1 sola columna */
+@media (max-width: 1200px) {
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-column {
+    position: relative;
+    top: 0;
+    margin-bottom: var(--space-xl);
+  }
+  .container-wide {
+    max-width: 100%;
+    padding: 0 var(--space-md);
+  }
+}
+
+/* ===== RESUM D'IMPACTE FIXE AL FINAL (STICKY BOTTOM) ===== */
+
+.stats-footer-sticky-wrapper {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85); /* Fondo blanco traslúcido */
+  backdrop-filter: blur(15px); /* Efecto de desenfoque cristalino */
+  border-top: 2px solid var(--clean-green);
+  padding: var(--space-md) 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  margin-top: var(--space-3xl);
+}
+
+.stats-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  max-width: 96%;
+  margin: 0 auto;
+}
+
+.stats-footer-grid .stat-highlight {
+  padding: var(--space-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px; /* Un poco más pequeña para que no robe tanto espacio */
+  background: var(--bg-glass-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.stats-footer-grid .big-number {
+  font-size: clamp(1.4rem, 3vw, 2.2rem); 
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.stats-footer-grid .stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Espacio extra al final de las acciones para que el último elemento no quede tapado por la barra */
+.actions-column {
+  padding-bottom: 150px; 
 }

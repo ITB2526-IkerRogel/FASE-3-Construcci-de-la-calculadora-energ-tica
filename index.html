@@ -36,23 +36,39 @@
           Fase 3 — Calculadora Energètica
         </div>
         <h1>Analitza el <span class="gradient-text">consum de recursos</span><br>del teu centre educatiu</h1>
-        <p>Dades reals tancades (2024-25) i projeccions amb IPC per al pròxim any, amb tendències temporals, cicles estacionals i variabilitat mensual.</p>
+        <p>Dades reals històriques tancades i projeccions dinàmiques amb IPC, amb tendències temporals, cicles estacionals i variabilitat mensual.</p>
         <div class="centre-name" id="centre-name"></div>
       </div>
     </section>
 
     <main class="container" id="app-content">
 
-      <!-- IPC Banner -->
       <section class="calc-section" id="ipc-banner"></section>
 
-      <div class="kpi-grid" id="kpi-grid"></div>
+      <section class="calc-section" style="background: var(--bg-card); padding: var(--space-xl); border-radius: var(--radius-lg); border: 2px solid var(--clean-green);">
+        <div class="section-header" style="margin-bottom: var(--space-md);">
+          <div>
+            <h2 class="section-title">🏆 Els 8 Càlculs Clau</h2>
+            <p class="section-subtitle" id="dynamic-year-subtitle">Consum estimat per a l'any <span class="dynamic-year"></span> (Complet vs. Període Lectiu)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 10px 15px; border-radius: 100px; border: 1px solid var(--border-color);">
+            <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <input type="checkbox" id="toggle-millores-global" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--clean-green);">
+              Aplicar Pla d'Acció 3 Anys (-30%)
+            </label>
+          </div>
+        </div>
+        <div class="kpi-grid" id="grid-8-calculs" style="margin-bottom: 0;">
+          </div>
+      </section>
+
+      <div class="kpi-grid" id="kpi-grid" style="margin-top: var(--space-2xl);"></div>
 
       <section class="calc-section">
         <div class="section-header">
           <div>
-            <h2 class="section-title">Calculadora de Consum</h2>
-            <p class="section-subtitle">Selecciona un indicador, mode de càlcul i vista (dades actuals o projecció amb IPC).</p>
+            <h2 class="section-title">Calculadora Detallada</h2>
+            <p class="section-subtitle">Selecciona un indicador, mode de càlcul i vista.</p>
           </div>
         </div>
 
@@ -65,18 +81,18 @@
             <div class="form-group">
               <label for="calc-view">Vista de Dades</label>
               <select id="calc-view">
-                <option value="projectat">📈 Projecció 2025-26 (IPC)</option>
-                <option value="actual">📋 Actual 2024-25 (Tancat)</option>
+                <option value="projectat" id="opt-projectat"></option>
+                <option value="actual" id="opt-actual"></option>
               </select>
             </div>
             <div class="form-group">
               <label for="calc-mode">Mode de càlcul</label>
               <select id="calc-mode">
-                <option value="anual">📅 Pròxim any complet</option>
+                <option value="anual">📅 Any complet</option>
                 <option value="periode">📆 Període personalitzat</option>
               </select>
             </div>
-            <div id="periode-controls" style="display:none;contents;">
+            <div id="periode-controls" style="display: contents;">
               <div class="form-group">
                 <label for="calc-mes-inici">Mes d'inici</label>
                 <select id="calc-mes-inici"></select>
@@ -96,7 +112,6 @@
         <div class="results-grid" id="results-grid"></div>
       </section>
 
-      <!-- Comparació actual vs projectat -->
       <section class="calc-section" id="comparison-section"></section>
 
       <section class="calc-section">
@@ -139,9 +154,6 @@
           </table>
         </div>
       </section>
-
-      <!-- Dades reals originals -->
-      <section class="calc-section" id="dades-reals"></section>
 
     </main>
 

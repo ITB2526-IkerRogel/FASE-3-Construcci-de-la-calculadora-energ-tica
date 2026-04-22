@@ -6,6 +6,12 @@
 (function () {
   'use strict';
 
+  // ===== DYNAMIC YEAR LABELS =====
+  const CURRENT_YEAR = new Date().getFullYear();
+  const NEXT_YEAR = CURRENT_YEAR + 1;
+  const HISTORIC_LABEL = 'Any Històric (2024-25)';
+  const PROJECTION_LABEL = `Projecció IPC ${CURRENT_YEAR}-${String(NEXT_YEAR).slice(-2)}`;
+
   let rawData = null;
   let indicadors = null;
 
@@ -248,13 +254,13 @@
         <div class="comparison-card">
           <h4>${ind.icona} ${ind.nom} — Any 3 (-30%)</h4>
           <div class="comparison-row">
-            <span class="label">Actual 2024-25</span>
+            <span class="label">${HISTORIC_LABEL}</span>
             <span class="values">
               <span class="original">${isMonetary ? Calculator.formatCurrency(consumActual) : Calculator.formatNumber(consumActual) + ' ' + ind.unitatCurta}</span>
             </span>
           </div>
           <div class="comparison-row">
-            <span class="label">Projecció IPC 2025-26</span>
+            <span class="label">${PROJECTION_LABEL}</span>
             <span class="values">
               <span style="color:var(--ipc-red);font-weight:600;">${Calculator.formatCurrency(costProjectatIPC)} (+${ind.ipcAplicat}%)</span>
             </span>

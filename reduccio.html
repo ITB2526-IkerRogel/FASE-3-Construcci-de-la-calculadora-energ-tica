@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Estratègies de reducció del consum energètic i de recursos de l'ITB. Consells pràctics i accions concretes amb economia circular.">
-  <title>Estratègies de Reducció — Calculadora ITB</title>
+  <meta name="description" content="Calculadora interactiva de reducció del consum energètic i de recursos de l'ITB. Selecciona accions i veure l'impacte en temps real.">
+  <title>Calculadora de Reducció — Calculadora ITB</title>
   <link rel="stylesheet" href="./css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
@@ -33,72 +33,64 @@
       <div class="container">
         <div class="hero-badge">
           <span class="dot"></span>
-          Fase 3 — Estratègies de Reducció
+          Fase 3 — Calculadora de Reducció
         </div>
-        <h1>Com <span class="gradient-text">reduir el consum</span><br>de cada indicador</h1>
-        <p>Accions concretes basades en les dades reals del centre, amb inversió estimada, potencial de reducció i principis d'economia circular.</p>
+        <h1>Calcula el teu <span class="gradient-text">impacte real</span></h1>
+        <p>Selecciona les accions i visualitza l'estalvi i la inversió en temps real al panell esquerre.</p>
         <div class="centre-name" id="centre-name"></div>
       </div>
     </section>
 
-    <main class="container">
+    <main class="container-wide">
+      
+      <div class="calculator-layout">
+        
+        <aside class="dashboard-column">
+          <div class="sticky-dashboard" id="impact-dashboard">
+            </div>
+        </aside>
 
-      <section class="calc-section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">🎯 Accions de Reducció per Indicador</h2>
-            <p class="section-subtitle">Cada acció inclou l'estimació de reducció, inversió necessària i classificació d'economia circular.</p>
-          </div>
+        <div class="actions-column">
+          <section class="calc-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title">🎯 Accions de Reducció per Indicador</h2>
+                <p class="section-subtitle">Fes clic a cada acció per activar-la. L'impacte es recalcula a l'instant.</p>
+              </div>
+            </div>
+            <div class="reduction-grid" id="reduction-grid">
+              </div>
+          </section>
         </div>
-        <div class="reduction-grid" id="reduction-grid"></div>
-      </section>
 
-      <section class="calc-section" style="margin-top:var(--space-2xl);">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">💡 Consells Pràctics</h2>
-            <p class="section-subtitle">Bones pràctiques quotidianes basades en les anomalies detectades a les dades del centre.</p>
-          </div>
-        </div>
-        <div id="tips-container"></div>
-      </section>
-
-      <section class="calc-section">
-        <div class="section-header">
-          <h2 class="section-title">🌍 ODS Relacionats</h2>
-        </div>
-        <div id="ods-container"></div>
-      </section>
-
-      <section class="calc-section" style="margin-top:var(--space-xl);">
-        <div class="section-header">
-          <h2 class="section-title">📊 Resum d'Impacte Potencial</h2>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-lg);">
-          <div class="stat-highlight fade-in">
-            <div class="big-number green">-30%</div>
-            <div class="stat-label">Objectiu de reducció global</div>
-          </div>
-          <div class="stat-highlight fade-in fade-in-delay-1">
-            <div class="big-number blue">3 anys</div>
-            <div class="stat-label">Horitzó temporal</div>
-          </div>
-          <div class="stat-highlight fade-in fade-in-delay-2">
-            <div class="big-number purple">16</div>
-            <div class="stat-label">Accions planificades</div>
-          </div>
-          <div class="stat-highlight fade-in fade-in-delay-3">
-            <div class="big-number amber">62%</div>
-            <div class="stat-label">Accions d'economia circular</div>
-          </div>
-        </div>
-      </section>
+      </div>
 
     </main>
 
+    <div class="stats-footer-sticky-wrapper">
+      <div class="stats-footer-grid">
+        <div class="stat-highlight">
+          <div class="big-number green" id="stat-reduccio">0%</div>
+          <div class="stat-label">Reducció Global</div>
+        </div>
+        <div class="stat-highlight">
+          <div class="big-number purple" id="stat-accions">0</div>
+          <div class="stat-label">Accions Actives</div>
+        </div>
+        <div class="stat-highlight">
+          <div class="big-number amber" id="stat-circular">0%</div>
+          <div class="stat-label">Economia Circular</div>
+        </div>
+        <div class="stat-highlight">
+          <div class="big-number blue" id="stat-roi-footer">—</div>
+          <div class="stat-label">Retorn Inversió</div>
+        </div>
+      </div>
+    </div>
+
     <footer class="main-footer">
       <div class="container">
-        <p>🌿 Calculadora ITB — Estratègies de Reducció · Fase 3 · Dades: <a href="./data/dataclean.json" target="_blank" class="json-link"><code>dataclean.json</code></a></p>
+        <p>🌿 Calculadora ITB — Fase 3 · Dades: <a href="./data/dataclean.json" target="_blank" class="json-link"><code>dataclean.json</code></a></p>
       </div>
     </footer>
 
