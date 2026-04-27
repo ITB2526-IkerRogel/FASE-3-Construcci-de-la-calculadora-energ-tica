@@ -277,7 +277,7 @@ body {
 
 /* ===== HERO SECTION ===== */
 .hero {
-  padding: var(--space-3xl) 0 var(--space-xl);
+  padding: var(--space-3xl) 0 var(--space-2xl);
   text-align: center;
 }
 
@@ -310,9 +310,9 @@ body {
 
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 400;
+  font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.1;
   margin-bottom: var(--space-md);
   animation: fadeInUp 600ms 100ms ease forwards;
   opacity: 0;
@@ -605,8 +605,6 @@ body {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-xl);
-  margin-left: 5%;
-  margin-right: 5%;
 }
 
 .controls-grid {
@@ -713,7 +711,6 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  margin: 0 10%;
 }
 
 .result-card.ipc-highlight {

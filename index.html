@@ -6,7 +6,7 @@
   <meta name="description" content="Calculadora energètica de l'Institut Tecnològic de Barcelona (ITB). Analitza el consum d'aigua, electricitat, consumibles i productes de neteja amb dades reals i projeccions IPC.">
   <title>Calculadora ITB — Calculadora Energètica</title>
   <link rel="stylesheet" href="./css/styles.css">
-  <script src="./js/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="bg-grid"></div>
@@ -22,17 +22,48 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
-          <li><a href="./index.html">📊 Històric</a></li>
-          <li><a href="./reduccio.html">📉 Calculadora</a></li>
+          <li><a href="./index.html" class="active">📊 Calculadora</a></li>
+          <li><a href="./reduccio.html">📉 Reducció</a></li>
           <li><a href="./pla-accio.html">📋 Pla d'Acció</a></li>
         </ul>
       </div>
     </nav>
 
-      <section class="hero hero-compact">
-        <h2>Analitza el teu <span class="gradient-text">consum de recursos</span></h2>
+    <section class="hero">
+        <h2>Analitza el Consum de recursosdel teu centre educatiu</h2>
     </section>
-    <section class="calc-section">
+
+    <main class="container" id="app-content">
+
+      <section class="calc-section" id="ipc-banner"></section>
+
+      <section class="calc-section" style="background: var(--bg-card); padding: var(--space-xl); border-radius: var(--radius-lg); border: 2px solid var(--clean-green);">
+        <div class="section-header" style="margin-bottom: var(--space-md);">
+          <div>
+            <h2 class="section-title">🏆 Els 8 Càlculs Clau</h2>
+            <p class="section-subtitle" id="dynamic-year-subtitle">Consum estimat per a l'any <span class="dynamic-year"></span> (Complet vs. Període Lectiu)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 10px 15px; border-radius: 100px; border: 1px solid var(--border-color);">
+            <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <input type="checkbox" id="toggle-millores-global" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--clean-green);">
+              Aplicar Pla d'Acció 3 Anys (-30%)
+            </label>
+          </div>
+        </div>
+        <div class="kpi-grid" id="grid-8-calculs" style="margin-bottom: 0;">
+          </div>
+      </section>
+
+      <div class="kpi-grid" id="kpi-grid" style="margin-top: var(--space-2xl);"></div>
+
+      <section class="calc-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Calculadora Detallada</h2>
+            <p class="section-subtitle">Selecciona un indicador, mode de càlcul i vista.</p>
+          </div>
+        </div>
+
         <div class="calc-controls">
           <div class="controls-grid">
             <div class="form-group">
@@ -53,7 +84,7 @@
                 <option value="periode">📆 Període personalitzat</option>
               </select>
             </div>
-            <div id="periode-controls" style="display: none;">
+            <div id="periode-controls" style="display: contents;">
               <div class="form-group">
                 <label for="calc-mes-inici">Mes d'inici</label>
                 <select id="calc-mes-inici"></select>
@@ -72,30 +103,8 @@
 
         <div class="results-grid" id="results-grid"></div>
       </section>
+
       <section class="calc-section" id="comparison-section"></section>
-
-    <main class="container" id="app-content">
-
-
-
-      <section class="calc-section" style="background: var(--bg-card); padding: var(--space-xl); border-radius: var(--radius-lg); border: 2px solid var(--clean-green);">
-        <div class="section-header" style="margin-bottom: var(--space-md);">
-          <div>
-            <h2 class="section-title">🏆 Històric Dels Nostres Consums </h2>
-            <p class="section-subtitle" id="dynamic-year-subtitle">Consum estimat per a l'any <span class="dynamic-year"></span> (Complet vs. Període Lectiu)</p>
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 10px 15px; border-radius: 100px; border: 1px solid var(--border-color);">
-            <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; gap: 10px;">
-              <input type="checkbox" id="toggle-millores-global" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--clean-green);">
-              Aplicar Pla d'Acció 3 Anys (-30%)
-            </label>
-          </div>
-        </div>
-        <div class="kpi-grid" id="grid-8-calculs" style="margin-bottom: 0;">
-          </div>
-      </section>
-
-        <div class="kpi-grid" id="kpi-grid" style="margin-top: var(--space-2xl);" ></div>
 
       <section class="calc-section">
         <div class="section-header">
@@ -107,7 +116,7 @@
           </div>
         </div>
       </section>
-      <section class="calc-section" id="ipc-banner"></section>
+
       <section class="calc-section">
         <div class="section-header">
           <h2 class="section-title">🍩 Distribució de Costos Anual</h2>
@@ -142,7 +151,7 @@
 
     <footer class="main-footer">
       <div class="container">
-        <p>🌿 Calculadora ITB — Calculadora Energètica · Fase 3 </p>
+        <p>🌿 Calculadora ITB — Calculadora Energètica · Fase 3 · Dades: <a href="./data/dataclean.json" target="_blank" class="json-link"><code>dataclean.json</code></a></p>
       </div>
     </footer>
 
