@@ -277,7 +277,7 @@ body {
 
 /* ===== HERO SECTION ===== */
 .hero {
-  padding: var(--space-3xl) 0 var(--space-2xl);
+  padding: var(--space-3xl) 0 var(--space-xl);
   text-align: center;
 }
 
@@ -310,9 +310,9 @@ body {
 
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: var(--space-md);
   animation: fadeInUp 600ms 100ms ease forwards;
   opacity: 0;
@@ -605,6 +605,8 @@ body {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-xl);
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .controls-grid {
@@ -711,6 +713,7 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  margin: 0 10%;
 }
 
 .result-card.ipc-highlight {
@@ -2467,4 +2470,240 @@ body {
 .actions-header-pretty .section-subtitle {
   font-size: 0.8rem !important;
   color: var(--text-muted);
+}
+/* ==================================================================== */
+/* ===== FIX: DISSENY BONIT PER A LES TARGETES DE RESULTAT (HISTÒRIC) ===== */
+/* ==================================================================== */
+
+.results-grid {
+  gap: var(--space-xl) !important;
+  max-width: 900px !important; /* Limita l'ample perquè no s'estirin massa en pantalles grans */
+  margin: 0 auto !important; /* Centra la graella a la pantalla */
+}
+
+.result-card {
+  margin: 0 !important; /* Elimina el marge del 10% que trencava el disseny */
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl) !important;
+  background: linear-gradient(135deg, var(--bg-card), rgba(255,255,255,0.7)) !important;
+  border: 1px solid rgba(46, 125, 50, 0.2) !important;
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.08) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.result-card .result-header {
+  margin-bottom: var(--space-md) !important;
+}
+
+.result-card .result-title {
+  font-size: 0.85rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 4px !important;
+}
+
+.result-card .result-value {
+  font-size: 2.8rem !important; /* Fem el número més impactant */
+  font-weight: 900 !important;
+  color: var(--text-primary) !important;
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+}
+/* ==================================================================== */
+/* ===== DISSENY SEGUR DE PESTANYES (TABS) PER A CHART.JS ===== */
+/* ==================================================================== */
+
+.tabs-section {
+  background: white !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  margin-bottom: var(--space-xl);
+}
+
+.tabs-header-nav {
+  display: flex;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 10px 0;
+  gap: 5px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.tab-nav-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: all 0.2s ease;
+}
+
+.tab-nav-btn:hover {
+  background: rgba(255,255,255,0.6);
+  color: var(--text-primary);
+}
+
+.tab-nav-btn.active {
+  background: white;
+  color: var(--clean-green);
+  border: 1px solid var(--border-color);
+  border-bottom-color: white;
+  margin-bottom: -1px;
+}
+
+/* Utilitzem Grid per sobreposar les pestanyes sense trencar els gràfics */
+.tabs-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  padding: var(--space-xl);
+  background: white;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  min-height: 350px;
+}
+
+.tab-pane {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.tab-pane.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+/* ==================================================================== */
+/* ===== AJUSTS DE MIDA I LAYOUT PER A RESULTATS I PESTANYES ===== */
+/* ==================================================================== */
+
+.results-grid {
+  gap: var(--space-lg) !important;
+  max-width: 100% !important; /* Ocupa tota la pantalla disponible a la dreta */
+  margin: 0 !important;
+}
+
+.result-card {
+  margin: 0 !important;
+  min-height: 220px !important; /* Molt més alta i prominent */
+  padding: var(--space-2xl) !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-card .result-value {
+  font-size: 3.5rem !important; /* Número molt gran per a una lectura clara */
+  font-weight: 900 !important;
+  margin: 10px 0 !important;
+}
+
+.result-card .result-title {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase;
+}
+
+/* Disseny de pestanyes compatible amb Chart.js */
+.tabs-section {
+  background: white !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.tabs-header-nav {
+  display: flex;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 10px 0;
+  gap: 5px;
+}
+
+.tab-nav-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.tab-nav-btn.active {
+  background: white;
+  color: var(--clean-green);
+  border: 1px solid var(--border-color);
+  border-bottom-color: white;
+  margin-bottom: -1px;
+}
+
+.tabs-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: var(--space-xl);
+  min-height: 400px;
+}
+
+.tab-pane {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.tab-pane.active {
+  opacity: 1;
+  visibility: visible;
+}
+/* ===== ESPACIO ENTRE LOS CÁLCULOS Y EL GRÁFICO ===== */
+.results-grid {
+  margin-bottom: var(--space-2xl) !important;
+}
+/* ===== CONTENEDOR GLOBAL DE LOS 8 INDICADORES ===== */
+.historic-full-width {
+  border: 3px solid var(--clean-green) !important; /* Borde verde más grueso que engloba todo */
+  background: linear-gradient(to bottom, rgba(67, 160, 71, 0.08), #ffffff) !important; /* Fondo degradado sutil */
+  padding: var(--space-xl) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 8px 30px rgba(67, 160, 71, 0.15) !important; /* Sombra resaltada */
+  margin-top: 5%;
+}
+
+/* ===== BOTÓN / CASILLA MÁS GRANDE Y VISUAL ===== */
+.toggle-pill {
+  border: 2px solid var(--clean-green) !important; /* Borde verde fuerte siempre visible */
+  background: #ffffff !important;
+  padding: 12px 24px !important; /* Botón más grande */
+  box-shadow: 0 4px 15px rgba(67, 160, 71, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.toggle-pill:hover {
+  background: #e8f5e9 !important; /* Se pinta de verde clarito al pasar el ratón */
+  transform: scale(1.03) !important; /* Hace un efecto de zoom para invitar al clic */
+}
+
+/* Hacer el cuadradito del checkbox mucho más grande */
+.toggle-pill input[type="checkbox"] {
+  width: 24px !important;
+  height: 24px !important;
+  cursor: pointer !important;
+  accent-color: var(--clean-green) !important;
 }
