@@ -605,6 +605,8 @@ body {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-xl);
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .controls-grid {
@@ -711,6 +713,7 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  margin: 0 10%;
 }
 
 .result-card.ipc-highlight {
